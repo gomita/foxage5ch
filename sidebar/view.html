@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>FoxAge5ch</title>
+	<link rel="stylesheet" href="common.css" />
+	<link rel="stylesheet" href="view.css" />
+</head>
+<body>
+<div id="container">
+	<div id="toolbox">
+		<div id="statusbar">&nbsp;</div>
+		<div id="toolbar">
+			<button id="checkUpdatesButton" i18n="title:checkUpdatesAll"><img src="/icons/sync-16.svg" /></button>
+			<button id="openUpdatesButton" i18n="title:openUpdatesAll"><img src="/icons/open-in-new-16.svg" /></button>
+			<button id="subscribeButton" i18n="title:subscribe"><img src="/icons/subscribe-16.svg" /></button>
+			<button id="toolsButton" i18n="title:tools"><img src="/icons/developer-16.svg" /></button>
+		</div>
+		<input id="searchbar" type="search" i18n="placeholder:search"></input>
+	</div>
+	<ul id="mainTree"></ul>
+	<div id="subTitle" style="display: none;">
+		<span id="subTitleText">&nbsp;</span>
+		<button id="subTitleButton"><img src="/icons/exit.png" /></button>
+	</div>
+	<ul id="subTree" hidden="true"></ul>
+</div>
+<div id="layer" hidden="true"><iframe></iframe></div>
+<div id="popup" hidden="true">
+	<div id="popup_checkUpdates" i18n="text:checkUpdates"></div>
+	<div id="popup_openUpdates" i18n="text:openUpdates"></div>
+	<hr  id="popup_sep1" />
+	<div id="popup_open" i18n="text:open"></div>
+	<div id="popup_openInTab" i18n="text:openInTab"></div>
+	<hr  id="popup_sep2" />
+	<div id="popup_newSeparator" i18n="text:newSeparator"></div>
+	<hr  id="popup_sep3" />
+	<div id="popup_fetchTitle" i18n="text:fetchTitle"></div>
+	<div id="popup_findThread" i18n="text:findThread"></div>
+	<div id="popup_transfer" i18n="text:transfer"></div>
+	<div id="popup_findNext" i18n="text:findNext"></div>
+	<hr  id="popup_sep4" />
+	<div id="popup_delete" i18n="text:delete"></div>
+	<hr  id="popup_sep5" />
+	<div id="popup_showInfo" i18n="text:showInfo"></div>
+</div>
+<div id="dropline" hidden="true"></div>
+<script src="common.js"></script>
+<script src="view.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>FoxAge5ch</title>
+	<link rel="stylesheet" href="common.css" />
+	<link rel="stylesheet" href="options.css" />
+	<style type="text/css">
+		input[type="text"] {
+			flex: 1; min-width: 2em;
+		}
+		.hbox {
+			margin-left: 0px;
+		}
+		/* cascade .hbox { display: flex; } */
+		.hbox[hidden="true"] {
+			display: none !important;
+		}
+	</style>
+</head>
+<body preload="true">
+<div id="toolbar">
+	<button id="backButton" i18n="title:back">
+		<img src="/icons/overflow-16.svg" />
+		<label for="backButton" i18n="text:back"></label>
+	</button>
+</div>
+<div id="content">
+	<h2 i18n="text:showInfo"></h2>
+	<div class="hbox">
+		<label for="titleField" i18n="text:title"></label>
+		<input id="titleField" type="text">
+	</div>
+	<div id="urlRow" class="hbox" hidden="true">
+		<label for="urlField">URL</label>
+		<input id="urlField" type="text" readonly="true">
+	</div>
+	<div id="checkDateRow" class="hbox" hidden="true">
+		<label for="checkDateField" i18n="text:checkDate"></label>
+		<input id="checkDateField" type="text" readonly="true">
+	</div>
+	<div id="createdRow" class="hbox" hidden="true">
+		<label for="createdField" i18n="text:created"></label>
+		<input id="createdField" type="text" readonly="true">
+	</div>
+	<div id="readResRow" class="hbox" hidden="true">
+		<label for="readResField" i18n="text:readRes"></label>
+		<input id="readResField" type="text" readonly="true" style="max-width: 4em;">
+	</div>
+	<div id="lastResRow" class="hbox" hidden="true">
+		<label for="lastResField" i18n="text:lastRes"></label>
+		<input id="lastResField" type="text" readonly="true" style="max-width: 4em;">
+	</div>
+	<div id="maxResRow" class="hbox" hidden="true">
+		<label for="maxResField" i18n="text:maxRes"></label>
+		<input id="maxResField" type="number" min="100" max="10000" step="100" style="max-width: 5em;">
+	</div>
+	<div id="skipRow" class="hbox" hidden="true">
+		<input id="skipField" type="checkbox">
+		<label for="skipField" i18n="text:skip,title:skip"></label>
+	</div>
+	<div class="hbox" id="buttons">
+		<input id="okButton" type="button" value="OK">
+		<input id="cancelButton" type="button" i18n="value:cancel">
+	</div>
+</div>
+<script src="common.js"></script>
+<script src="showInfo.js"></script>
+</body>
+</html>

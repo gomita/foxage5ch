@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>FoxAge5ch</title>
+	<link rel="stylesheet" href="common.css" />
+	<link rel="stylesheet" href="options.css" />
+</head>
+<body preload="true">
+<div id="toolbar" hidden="true">
+	<button id="backButton" i18n="title:back">
+		<img src="/icons/overflow-16.svg" />
+		<label for="backButton" i18n="text:back"></label>
+	</button>
+</div>
+<div id="content">
+	<h2 i18n="text:treeMode"></h2>
+	<div class="hbox">
+		<input id="treeMode_0" type="radio" name="treeMode" value="0">
+		<label for="treeMode_0" i18n="text:treeMode_0"></label>
+		<input id="treeMode_1" type="radio" name="treeMode" value="1" style="margin-left: 8px;">
+		<label for="treeMode_1" i18n="text:treeMode_1"></label>
+	</div>
+	<h2 i18n="text:checkUpdates"></h2>
+	<div class="hbox">
+		<label for="maxRequests" i18n="text:maxRequests"></label>
+		<select id="maxRequests">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+		</select>
+	</div>
+	<h2 i18n="text:openThreads"></h2>
+	<div class="hbox">
+		<label for="upwardMargin" i18n="text:upwardMargin"></label>
+		<input id="upwardMargin" type="number" min="0" max="100" style="width: 3em;">
+	</div>
+	<div class="hbox">
+		<label for="openInterval" i18n="text:openInterval"></label>
+		<input id="openInterval" type="number" min="1" max="60" style="width: 3em;">
+	</div>
+	<div class="hbox">
+		<input id="https" type="checkbox">
+		<label for="https" i18n="text:https"></label>
+	</div>
+	<h2 i18n="text:dataManage"></h2>
+	<div class="hbox">
+		<input id="backupButton" type="button" i18n="value:backup">
+		<label for="restoreButton" class="button" i18n="text:restore"></label>
+		<input id="restoreButton" type="file" accept=".json" hidden="true">
+	</div>
+	<h2 i18n="text:links"></h2>
+	<div id="links" class="hbox">
+		<span class="link" href="https://5ch.net/" i18n="text:5chBBS"></span>
+		<span>|</span>
+		<span class="link" href="https://github.com/gomita/foxage5ch">GitHub</span>
+	</div>
+</div>
+<script src="common.js"></script>
+<script src="options.js"></script>
+</body>
+</html>

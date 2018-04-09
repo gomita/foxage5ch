@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>FoxAge5ch</title>
+	<link rel="stylesheet" href="common.css" />
+	<link rel="stylesheet" href="options.css" />
+	<style type="text/css">
+		#resultList {
+			overflow-y: auto;
+			height: 30em;
+			border-top: 1px solid ThreeDLightShadow;
+			border-bottom: 1px solid ThreeDLightShadow;
+			/* negative margin against #content { padding 6px; } */
+			margin: 12px -6px 0px -6px;
+		}
+		#resultList .hbox {
+			margin: 8px 0px 8px 6px;
+		}
+		#resultList label {
+			-moz-user-select: none;
+		}
+		#resultList strong {
+			text-decoration: underline;
+		}
+		#resultList input[disabled] + label {
+			color: GrayText;
+		}
+	</style>
+</head>
+<body preload="true">
+<div id="toolbar">
+	<button id="backButton" i18n="title:back">
+		<img src="/icons/overflow-16.svg" />
+		<label for="backButton" i18n="text:back"></label>
+	</button>
+</div>
+<div id="content">
+	<h2 i18n="text:findNext"></h2>
+	<div class="hbox">
+		<img id="throbber" />
+		<label id="logger" class="nowrap" style="flex: 1;"></label>
+	</div>
+	<div class="hbox">
+		<input id="searchkey" type="search" i18n="placeholder:search" style="flex: 1;">
+	</div>
+	<div class="hbox">
+		<input id="deleteOrg" type="checkbox">
+		<label for="deleteOrg" i18n="text:delete_org"></label>
+	</div>
+	<div id="resultList">
+	</div>
+	<div class="hbox" id="buttons">
+		<input id="addButton" type="button" i18n="value:add">
+		<input id="cancelButton" type="button" i18n="value:cancel">
+	</div>
+</div>
+<script src="common.js"></script>
+<script src="findThread.js"></script>
+</body>
+</html>

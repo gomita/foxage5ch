@@ -1,0 +1,70 @@
+/* ::::: common ::::: */
+
+/* derived from chrome://browser/content/extension.css */
+html, body {
+	box-sizing: border-box;
+	color: #222426;
+	background: white;
+	cursor: default;
+	display: flex;
+	flex-direction: column;
+	font: caption;
+	margin: 0;
+	padding: 0;
+/*
+	-moz-user-select: none;
+*/
+}
+
+body * {
+	box-sizing: border-box;
+	text-align: start;
+}
+
+body[preload] {
+	transition-property: opacity;
+	transition-duration: 0.3s;
+}
+
+body[preload="true"] {
+	opacity: 0;
+}
+
+body[preload="false"] {
+	opacity: 1;
+}
+
+/* ::::: toolbar button ::::: */
+
+button {
+	border: unset;
+	background: unset;
+	margin: 0px 2px;
+	padding: 4px;
+	line-height: 0px;
+	border-radius: 2px;
+}
+
+button:hover {
+	background-color: rgba(12, 12, 13, 0.1);
+}
+
+/* button:active‚ª‚È‚º‚©Œø‚©‚È‚¢ */
+button:active, button[checked] {
+	background-color: rgba(12, 12, 13, 0.2);
+}
+
+button > * {
+	vertical-align: middle;
+}
+
+button img {
+	width: 16px;
+	height: 16px;
+	opacity: 0.7;
+}
+
+button label {
+	font: caption;
+}
+

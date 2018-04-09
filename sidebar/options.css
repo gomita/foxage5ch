@@ -1,0 +1,101 @@
+/* ::::: area ::::: */
+
+#toolbar {
+	padding: 2px;
+	text-align: right;
+}
+
+#toolbar #backButton img {
+	transform: scale(-1, 1);
+}
+
+#content {
+	padding: 6px;
+}
+
+.hbox {
+	margin-left: 6px;
+	display: flex;
+	align-items: center;
+}
+
+.hbox > * {
+	margin-right: 4px !important;
+}
+
+.hbox + .hbox {
+	margin-top: 10px;
+}
+
+.hbox label {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+#buttons {
+	justify-content: center;
+	margin-top: 30px;
+}
+
+/* ::::: elements ::::: */
+
+h2 {
+	display: flex;
+	flex-direction: row;
+	font: caption;
+}
+
+h2:after {
+	flex: auto;
+	content: "";
+	margin-left: 4px;
+	background-image: url('/icons/separator.png');
+	background-repeat: repeat-x;
+	background-position: center;
+}
+
+input, label {
+	font: caption;
+}
+
+input[type="radio"], input[type="checkbox"] {
+	/* unset margin in browser css */
+	margin: 0px;
+}
+
+.button, input[type="button"] {
+	margin: 3px;
+	padding: 3px 6px;
+	display: inline-block;
+	min-width: 5em;
+	border: 1px solid ButtonShadow;
+	border-radius: 2px;
+	background-color: ButtonHighlight;
+	text-align: center;
+}
+
+.button:hover, input[type="button"]:hover {
+	background-color: rgba(12, 12, 13, 0.1);
+}
+
+.button:active, input[type="button"]:active {
+	background-color: rgba(12, 12, 13, 0.2);
+}
+
+.link {
+	font: caption;
+	color: -moz-hyperlinktext;
+	cursor: pointer;
+}
+
+.link:hover {
+	text-decoration: underline;
+}
+
+.nowrap {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+

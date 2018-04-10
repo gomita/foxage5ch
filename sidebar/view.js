@@ -47,6 +47,7 @@ function uninit() {
 	document.removeEventListener("dragover", onDragOver);
 	document.removeEventListener("dragleave", onDragLeave);
 	document.removeEventListener("drop", onDrop);
+	document.getElementById("searchbar").onchange = null;
 	clearTimeout(gStatusTimer);
 	gStatusBar = null;
 	gPopup = null;
@@ -222,8 +223,8 @@ function onDragStart(event) {
 		dt.setData("text/x-moz-url", url + "\n" + item.title);
 		dt.setData("text/unicode", url);
 	}
-	if (item.type != FoxAgeUtils.TYPE_THREAD) {
-		// 板または区切りをドラッグ開始時、アイテムIDを転送
+	if (item.type != FoxAgeUtils.TYPE_THREAD && !document.getElementById("searchbar").value) {
+		// 板または区切りをドラッグ開始時、アイテムIDを転送（ただし検索中は除く）
 		dt.setData(FoxAgeUtils.DROP_TYPE, item.id);
 	}
 	dt.dropEffect = "move";
@@ -282,6 +283,7 @@ function onDragOver(event) {
 
 function onDragLeave(event) {
 	document.getElementById("dropline").hidden = true;
+	_lastDragOver = "";
 }
 
 async function onDrop(event) {
@@ -294,6 +296,7 @@ async function onDrop(event) {
 		// beforeAfterの計算は面倒なので_lastDragOver文字列から採取
 		if (!/^drop_(\w+):/.test(_lastDragOver))
 			return;
+		_lastDragOver = "";
 		let beforeAfter = RegExp.$1 == "before" ? -1 : 1;
 		if (!canDrop(event.target, beforeAfter))
 			return;
@@ -318,6 +321,7 @@ async function onDrop(event) {
 function onSearch(event) {
 	// #debug-begin
 	if (event.target.value == "xuldev") {
+		document.getElementById("checkUpdatesButton").setAttribute("checked", "true");
 		var items = FoxAgeSvc.getChildItems("root").filter(item => item.type == FoxAgeUtils.TYPE_BOARD);
 		FoxAgeSvc._addStatusFlag(items[1], FoxAgeUtils.STATUS_CHECKING);
 		FoxAgeSvc._notify("rebuild-tree");
@@ -557,11 +561,12 @@ function showSubPane(aBoardItem) {
 	if (FoxAgeSvc.getPref("treeMode") != 1)
 		return;
 	// 板タイトルを表示
+	var url = FoxAgeUtils.parseToURL(aBoardItem, FoxAgeSvc.getPref("https"));
 	var subTitle = document.getElementById("subTitle");
 	subTitle.style.display = "";
 	var subTitleText = document.getElementById("subTitleText");
 	subTitleText.textContent = aBoardItem.title;
-	subTitleText.setAttribute("title", aBoardItem.title);
+	subTitle.setAttribute("title", aBoardItem.title + "\n" + url);
 	// サブツリーを表示
 	gSubTree.hidden = false;
 	gSubTree.setAttribute("itemId", aBoardItem.id);

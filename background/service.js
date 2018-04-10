@@ -25,6 +25,8 @@ var FoxAgeSvc = {
 	_init: async function() {
 		LOG("service init");	// #debug
 		await this._readData();
+		// データ読み込み完了後にツリー再描画
+		this._notify("rebuild-tree");
 		browser.browserAction.onClicked.addListener(this._handleBrowserAction);
 //		browser.runtime.onSuspend.addListener(this._destroy);
 //		browser.storage.onChanged.addListener(function(changes, area) {
@@ -73,13 +75,9 @@ var FoxAgeSvc = {
 	_readData: async function() {
 		if (!this._defaultPrefs) {
 			// デフォルト設定値読み込み
-			await fetch(browser.extension.getURL("/defaults/prefs.json"))
-			.then(response => {
-				return response.text();
-			})
-			.then(text => {
-				this._defaultPrefs = JSON.parse(text);
-			});
+			let response = await fetch(browser.extension.getURL("/defaults/prefs.json"));
+			let text = await response.text();
+			this._defaultPrefs = JSON.parse(text);
 		}
 		return browser.storage.local.get().then(async data => {
 			// ユーザー設定値読み込み
@@ -94,14 +92,10 @@ var FoxAgeSvc = {
 			}
 			else {
 				// 初期データ読み込み
-				await fetch(browser.extension.getURL("/defaults/items.json"))
-				.then(response => {
-					return response.text();
-				})
-				.then(text => {
-					this._allItems = JSON.parse(text);
-					this._updateIndexForItemId();
-				})
+				let response = await fetch(browser.extension.getURL("/defaults/items.json"));
+				let text = await response.text();
+				this._allItems = JSON.parse(text);
+				this._updateIndexForItemId();
 			}
 		}, () => {
 			console.error("failed to get local storage");
@@ -360,7 +354,7 @@ var FoxAgeSvc = {
 		// 正規表現によるタイトル検索
 		else {
 			let pattern = new RegExp(aKey, "i");
-			return this._allItems.filter(item => pattern.test(item.title));
+			return this._allItems.filter(item => item.id != "root" && pattern.test(item.title));
 		}
 	},
 

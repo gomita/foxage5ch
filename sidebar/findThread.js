@@ -6,6 +6,7 @@ var gThreadItem;
 var gDatList = [];
 var gLogger;
 var gRequest;
+var gSearchTimer;
 
 function init() {
 	localize();
@@ -14,7 +15,7 @@ function init() {
 	document.getElementById("backButton").onclick = window.top.hideLayer;
 	document.getElementById("cancelButton").onclick = window.top.hideLayer;
 	document.getElementById("addButton").onclick = onAddButtonClick;
-	document.getElementById("searchkey").onchange = execSearch;
+	document.getElementById("searchkey").oninput = onInput;
 	document.getElementById("searchkey").onkeypress = onKeyPress;
 	fitToContent();
 	// URLの?以降からIDを取得
@@ -48,6 +49,9 @@ function init() {
 }
 
 function uninit() {
+	document.getElementById("searchkey").oninput = null;
+	document.getElementById("searchkey").onkeypress = null;
+	clearTimeout(gSearchTimer);
 	if (gRequest) {
 		gRequest.destroy();
 		gRequest = null;
@@ -94,6 +98,7 @@ function execSearch() {
 	while (resultList.lastChild)
 		resultList.removeChild(resultList.lastChild);
 	var searchkey = document.getElementById("searchkey").value;
+	console.log("execSearch: " + searchkey);	// #debug
 	if (!searchkey) {
 		// すべてのスレを表示
 		gDatList.map(dat => {
@@ -196,11 +201,20 @@ function onAddButtonClick(event) {
 }
 
 function onKeyPress(event) {
+	clearTimeout(gSearchTimer);
 	if (event.keyCode == event.DOM_VK_ESCAPE && event.target.value) {
 		event.stopPropagation();
 		event.target.value = "";
 		execSearch();
 	}
+	else if (event.keyCode == event.DOM_VK_RETURN) {
+		execSearch();
+	}
+}
+
+function onInput(event) {
+	clearTimeout(gSearchTimer);
+	gSearchTimer = setTimeout(execSearch, 500);
 }
 
 function trace(aText) {

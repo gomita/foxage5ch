@@ -3,6 +3,7 @@
 
 var gStatusBar;
 var gStatusTimer;
+var gSearchTimer;
 var gMainTree;
 var gSubTree;
 var gPopup;
@@ -17,7 +18,7 @@ function init() {
 	document.addEventListener("dragover", onDragOver);
 	document.addEventListener("dragleave", onDragLeave);
 	document.addEventListener("drop", onDrop);
-	document.getElementById("searchbar").onchange = onSearch;
+	document.getElementById("searchbar").oninput = onSearch;
 	browser.runtime.onMessage.addListener(onMessage);
 	gStatusBar = document.getElementById("statusbar");
 	gPopup     = document.getElementById("popup");
@@ -47,8 +48,9 @@ function uninit() {
 	document.removeEventListener("dragover", onDragOver);
 	document.removeEventListener("dragleave", onDragLeave);
 	document.removeEventListener("drop", onDrop);
-	document.getElementById("searchbar").onchange = null;
+	document.getElementById("searchbar").oninput = null;
 	clearTimeout(gStatusTimer);
+	clearTimeout(gSearchTimer);
 	gStatusBar = null;
 	gPopup = null;
 	gMainTree = null;
@@ -182,6 +184,7 @@ function onKeyPress(event) {
 	}
 	// 検索バー上
 	if (event.target.id == "searchbar") {
+		clearTimeout(gSearchTimer);
 		// Escキー押下で検索終了
 		if (event.keyCode == event.DOM_VK_ESCAPE) {
 			event.target.value = "";
@@ -332,7 +335,8 @@ function onSearch(event) {
 		return;
 	}
 	// #debug-end
-	rebuildTree();
+	clearTimeout(gSearchTimer);
+	gSearchTimer = setTimeout(rebuildTree, 500);
 }
 
 function onMessage(request, sender, sendResponse) {

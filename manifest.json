@@ -1,13 +1,13 @@
 {
 	"manifest_version": 2,
 	"name": "FoxAge5ch",
-	"version": "5.0",
+	"version": "5.0.1",
 	"description": "__MSG_extensionDescription__",
 	"icons": {
 		"48": "icons/icon-48.png",
 		"96": "icons/icon-96.png"
 	},
-	"default_locale": "en",
+	"default_locale": "ja",
 	"applications": {
 		"gecko": {
 			"id": "foxage2ch@xuldev.org"

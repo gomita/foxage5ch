@@ -558,6 +558,9 @@ function rebuildTree(aItemId) {
 		oldElt.parentNode.replaceChild(newElt, oldElt);
 		if (selected)
 			newElt.classList.add("selected");
+		// サブツリーにaItemIdで指定された板のスレ一覧が表示されていれば、サブツリーを再表示する
+		if (!gSubTree.hidden && gSubTree.getAttribute("itemId") == aItemId)
+			showSubPane(FoxAgeSvc.getItem(aItemId));
 	}
 }
 

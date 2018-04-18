@@ -480,7 +480,7 @@ var FoxAgeSvc = {
  		// 板のプロパティを更新
 		this._updateBoardStats(aBoardItem);
 		this.changeItemProperty(aBoardItem, "checkDate", Math.floor(new Date().getTime() / 1000));
-		this._notify("rebuild-tree");
+		this._notify("rebuild-tree", aBoardItem.id);
 	},
 
 	////////////////////////////////////////////////////////////////////////////////

@@ -698,16 +698,16 @@ var FoxAgeSvc = {
 			if (this._openUpdatesQueue.length == 0)
 				this._openUpdatesNext();
 			else
-				this._openUpdatesTimer = setTimeout(() => this._openUpdatesNext(), 3000);
+				this._openUpdatesTimer = setTimeout(() => this._openUpdatesNext(), this.getPref("openInterval") * 1000);
 		}
 	},
 
 	////////////////////////////////////////////////////////////////////////////////
 	// タイトル取得
 
-	// タイトル取得用のHTTPRequestオブジェクト
 	_fetchTitleQueue: [],
 
+	// タイトル取得用のHTTPRequestオブジェクト
 	_fetchTitleRequest: null,
 
 	// タイトル取得処理待ちのアイテムIDの配列

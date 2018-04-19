@@ -493,7 +493,12 @@ var FoxAgeSvc = {
  		// 板のプロパティを更新
 		this._updateBoardStats(aBoardItem);
 		this.changeItemProperty(aBoardItem, "checkDate", Math.floor(new Date().getTime() / 1000));
-		this._notify("rebuild-tree", aBoardItem.id);
+		// ツリー表示かつその板のフォルダが開いていて更新ありの場合、ツリー全体を再描画
+		// それ以外の場合は更新チェックした板のみ再描画
+		if (unread > 0 && aBoardItem.open && this.getPref("treeMode") == 0)
+			this._notify("rebuild-tree");
+		else
+			this._notify("rebuild-tree", aBoardItem.id);
 	},
 
 	////////////////////////////////////////////////////////////////////////////////

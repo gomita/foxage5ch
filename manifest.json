@@ -10,7 +10,8 @@
 	"default_locale": "ja",
 	"applications": {
 		"gecko": {
-			"id": "foxage2ch@xuldev.org"
+			"id": "foxage2ch@xuldev.org",
+			"strict_min_version": "57.0"
 		}
 	},
 	"background": {

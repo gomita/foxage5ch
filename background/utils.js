@@ -182,6 +182,7 @@ var FoxAgeUtils = {
 		aString = aString.replace(/&lt;/g, '<');
 		aString = aString.replace(/&gt;/g, '>');
 		aString = aString.replace(/&quot;/g, '"');
+		aString = aString.replace(/&#169;/g, '©');
 		return aString;
 	},
 
@@ -191,12 +192,9 @@ var FoxAgeUtils = {
 		aTitle = aTitle.replace(/ - \d{10} - したらば掲示板/, "");
 		aTitle = aTitle.replace("[転載禁止]", "", "g");
 		aTitle = aTitle.replace("[無断転載禁止]", "", "g");
-		aTitle = aTitle.replace("&copy;5ch.net", "", "g");	// ©5ch.net
-		aTitle = aTitle.replace("&#169;5ch.net", "", "g");	// ©5ch.net
-		aTitle = aTitle.replace("&copy;5ch.net", "", "g");	// ©5ch.net
-		aTitle = aTitle.replace("&#169;5ch.net", "", "g");	// ©5ch.net
-		aTitle = aTitle.replace("&copy;bbspink.com", "", "g");	// ©bbspink.com
-		aTitle = aTitle.replace("&#169;bbspink.com", "", "g");	// @bbspink.com
+		aTitle = aTitle.replace("©2ch.net", "", "g");	// ©2ch.net
+		aTitle = aTitle.replace("©5ch.net", "", "g");	// ©5ch.net
+		aTitle = aTitle.replace("©bbspink.com", "", "g");	// ©bbspink.com
 		aTitle = aTitle.replace(/■|◆|●|★|☆/g, " ");
 		aTitle = aTitle.replace(/[\u0000-\u001F]/g, "");	// 制御文字
 		aTitle = aTitle.replace(/\s+/g, " ");	// 連続する空白

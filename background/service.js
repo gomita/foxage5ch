@@ -159,11 +159,24 @@ var FoxAgeSvc = {
 		else
 			return;
 		// .2ch.net/ => .5ch.net/置換
-		data[DATA_KEY_ITEMS].forEach(item => {
-			item.id = item.id.replace(".2ch.net/", ".5ch.net/");
+		data[DATA_KEY_ITEMS].forEach((item, idx, arr) => {
+			let newId = item.id.replace(".2ch.net/", ".5ch.net/");
+			if (newId != item.id) {
+				// アイテムIDを置換しようとしたが既存IDと重複している場合、duplicatedフラグを立てる
+				if (arr.find(_item => _item.id == newId))
+					item.duplicated = true;
+				item.id = newId;
+			}
 			if (item.type == FoxAgeUtils.TYPE_THREAD)
 				item.parent = item.parent.replace(".2ch.net/", ".5ch.net/");
 		});
+		// duplicatedフラグが立ったアイテムを除外
+		// #debug-begin
+		data[DATA_KEY_ITEMS].filter(item => item.duplicated).map(item => {
+			LOG("removing duplicated item: " + item.id);
+		});
+		// #debug-end
+		data[DATA_KEY_ITEMS] = data[DATA_KEY_ITEMS].filter(item => !item.duplicated);
 		await browser.storage.local.set(data);
 		await this._readData();
 		this._notify("reload-data");

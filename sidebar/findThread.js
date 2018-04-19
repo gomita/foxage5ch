@@ -112,8 +112,8 @@ function execSearch() {
 			if (gThreadItem && gThreadItem.id == dat.id)
 				return false;
 			let [match, score] = compareTitles(searchkey, dat.title);
-			// スコアが1以下の場合は除外
-			if (score <= 1)
+			// スコアが0の場合は除外
+			if (score < 1)
 				return false;
 			dat.match = match, dat.score = score;
 			return true;
@@ -166,14 +166,30 @@ function purifyTitle(aTitle) {
 function elementForDat(dat, matching) {
 	let elt = document.createElement("div");
 	elt.className = "hbox";
-	elt.innerHTML = `<input id="${dat.id}" type="checkbox" title="${dat.title}" lastRes="${dat.lastRes}">`
-	              + `<label for="${dat.id}" title="${dat.title}">`
-	              + (matching ? dat.title.replace(dat.match, `<strong>${dat.match}</strong>`) : dat.title)
-	              + `</label>`;
+	let input = document.createElement("input");
+	input.setAttribute("id", dat.id);
+	input.setAttribute("type", "checkbox");
+	input.setAttribute("title", dat.title);
+	input.setAttribute("lastRes", dat.lastRes);
+	elt.appendChild(input);
+	let label = document.createElement("label");
+	label.setAttribute("for", dat.id);
+	label.setAttribute("title", dat.title);
+	if (matching && new RegExp(`(^.*)${dat.match}(.*$)`).test(dat.title)) {
+		label.appendChild(document.createTextNode(RegExp.$1));
+		let strong = document.createElement("strong");
+		strong.textContent = dat.match;
+		label.appendChild(strong);
+		label.appendChild(document.createTextNode(RegExp.$2));
+	}
+	else {
+		label.textContent = dat.title;
+	}
+	elt.appendChild(label);
 	// すでに追加済みのスレッドはチェック済みかつ非活性にする
 	if (FoxAgeSvc.getItem(dat.id)) {
-		elt.firstChild.checked = true;
-		elt.firstChild.disabled = true;
+		input.checked = true;
+		input.disabled = true;
 	}
 	return elt;
 }

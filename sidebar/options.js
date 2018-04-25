@@ -5,6 +5,8 @@ function init() {
 	localize();
 	captureKeyEvents();
 	disableContextMenu();
+	document.getElementById("browserAction_0").onchange = onBrowserActionChange;
+	document.getElementById("browserAction_1").onchange = onBrowserActionChange;
 	document.getElementById("treeMode_0").onchange = onTreeModeChange;
 	document.getElementById("treeMode_1").onchange = onTreeModeChange;
 	document.getElementById("maxRequests").onchange = onMaxRequestsChange;
@@ -15,6 +17,8 @@ function init() {
 	document.getElementById("restoreButton").onchange = onRestoreButton;
 	document.getElementById("links").onclick = onLinksClick;
 	// 初期選択
+	var browserAction = FoxAgeSvc.getPref("browserAction");
+	document.getElementById("browserAction_" + browserAction).checked = true;
 	var treeMode = FoxAgeSvc.getPref("treeMode");
 	document.getElementById("treeMode_" + treeMode).checked = true;
 	var upwardMargin = FoxAgeSvc.getPref("upwardMargin");
@@ -40,6 +44,10 @@ function init() {
 function uninit() {
 	FoxAgeSvc = null;
 	FoxAgeUtils = null;
+}
+
+function onBrowserActionChange(event) {
+	FoxAgeSvc.setPref("browserAction", parseInt(event.target.value, 10));
 }
 
 function onTreeModeChange(event) {

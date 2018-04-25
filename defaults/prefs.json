@@ -1,4 +1,5 @@
 {
+	"browserAction": 0,
 	"treeMode": 0,
 	"maxRequests": 2,
 	"upwardMargin": 2,

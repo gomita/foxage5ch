@@ -54,6 +54,9 @@
 	"delete_org": { "message": "元スレを削除" },
 	"add": { "message": "追加" },
 	// options
+	"browserAction": { "message": "ツールバーボタンの動作" },
+	"browserAction_0": { "message": "サイドバーで開く" },
+	"browserAction_1": { "message": "タブで開く" },
 	"treeMode": { "message": "ツリー表示" },
 	"treeMode_0": { "message": "通常ツリー" },
 	"treeMode_1": { "message": "２ペイン" },

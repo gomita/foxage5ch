@@ -54,6 +54,9 @@
 	"delete_org": { "message": "Delete original thread" },
 	"add": { "message": "Add" },
 	// options
+	"browserAction": { "message": "Toolbar Button" },
+	"browserAction_0": { "message": "Open in Sidebar" },
+	"browserAction_1": { "message": "Open in Tab" },
 	"treeMode": { "message": "Tree View" },
 	"treeMode_0": { "message": "Normal" },
 	"treeMode_1": { "message": "Two panes" },

@@ -891,14 +891,27 @@ var FoxAgeSvc = {
 
 	// ツールバーボタンクリック時
 	_handleBrowserAction: async function(tab) {
+		if (FoxAgeSvc.getPref("browserAction") == 0) {
+			// サイドバーで開く
 /*
-		// 非同期になるとイベントハンドラとは別の制約を受けるため動作しない
-		let open = await browser.sidebarAction.isOpen({});
-		open ? browser.sidebarAction.close()
-		     : browser.sidebarAction.open();
+			// 非同期になるとイベントハンドラとは別の制約を受けるため動作しない
+			let open = await browser.sidebarAction.isOpen({});
+			open ? browser.sidebarAction.close()
+			     : browser.sidebarAction.open();
 */
-		// 面倒なのでひとまずはサイドバーを開くだけにする
-		browser.sidebarAction.open();
+			// 面倒なのでひとまずはサイドバーを開くだけにする
+			browser.sidebarAction.open();
+		}
+		else {
+			// タブで開く
+			let url = browser.runtime.getURL("sidebar/view.html");
+			let active = true;
+			let tabs = await browser.tabs.query({ url, currentWindow: true });
+			if (tabs.length > 0)
+				browser.tabs.update(tabs[0].id, { active });
+			else
+				browser.tabs.create({ url, active });
+		}
 	},
 
 	// メッセージ送信→応答→Promiseを返す

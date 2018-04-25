@@ -22,7 +22,16 @@
 	},
 	"browser_action": {
 		"default_title": "FoxAge5ch",
-		"default_icon": "icons/icon-16.png"
+		"default_icon": "icons/icon-16.png",
+		"theme_icons": [{
+			"light": "icons/icon-light-16.png",
+			"dark": "icons/icon-16.png",
+			"size": 16
+		}, {
+			"light": "icons/icon-light-32.png",
+			"dark": "icons/icon-32.png",
+			"size": 32
+		}]
 	},
 	"sidebar_action": {
 		"browser_style": true,

@@ -62,6 +62,8 @@
 	"treeMode_1": { "message": "２ペイン" },
 	"maxRequests": { "message": "最大同時接続数:" },
 	"openThreads": { "message": "スレッドを開く" },
+	"clickBehavior_1": { "message": "左クリック時、新しいタブで開く" },
+	"clickBehavior_2": { "message": "すぐにそのタブに切り替える" },
 	"upwardMargin": { "message": "レスさかのぼり表示数:" },
 	"openInterval": { "message": "連続でスレを開く間隔(秒):" },
 	"https": { "message": "HTTPS 接続 (*.5ch.net)" },

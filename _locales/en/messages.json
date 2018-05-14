@@ -62,6 +62,8 @@
 	"treeMode_1": { "message": "Two panes" },
 	"maxRequests": { "message": "Max number of connections:" },
 	"openThreads": { "message": "Open Threads" },
+	"clickBehavior_1": { "message": "Open in a new tab with left-click" },
+	"clickBehavior_2": { "message": "Switch to the tab immediately" },
 	"upwardMargin": { "message": "Number of posts to show upwardly:" },
 	"openInterval": { "message": "Interval to open threads (sec):" },
 	"https": { "message": "HTTPS connections (*.5ch.net)" },

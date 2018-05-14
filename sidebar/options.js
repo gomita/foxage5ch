@@ -12,6 +12,8 @@ function init() {
 	document.getElementById("maxRequests").onchange = onMaxRequestsChange;
 	document.getElementById("upwardMargin").onchange = onUpwardMarginChange;
 	document.getElementById("openInterval").onchange = onOpenIntervalChange;
+	document.getElementById("clickBehavior_1").onchange = onClickBehaviorChange;
+	document.getElementById("clickBehavior_2").onchange = onClickBehaviorChange;;
 	document.getElementById("https").onchange = onHttpsChange;
 	document.getElementById("backupButton").onclick = onBackupButton;
 	document.getElementById("restoreButton").onchange = onRestoreButton;
@@ -21,6 +23,9 @@ function init() {
 	document.getElementById("browserAction_" + browserAction).checked = true;
 	var treeMode = FoxAgeSvc.getPref("treeMode");
 	document.getElementById("treeMode_" + treeMode).checked = true;
+	var clickBehavior = FoxAgeSvc.getPref("clickBehavior");
+	document.getElementById("clickBehavior_1").checked = clickBehavior >= 1;
+	document.getElementById("clickBehavior_2").checked = clickBehavior == 2;
 	var upwardMargin = FoxAgeSvc.getPref("upwardMargin");
 	document.getElementById("upwardMargin").value = upwardMargin;
 	var openInterval = FoxAgeSvc.getPref("openInterval");
@@ -64,6 +69,16 @@ function onTreeModeChange(event) {
 
 function onMaxRequestsChange(event) {
 	FoxAgeSvc.setPref("maxRequests", parseInt(event.target.value, 10));
+}
+
+function onClickBehaviorChange(event) {
+	let clickBehavior = 0;
+	if (document.getElementById("clickBehavior_1").checked) {
+		clickBehavior = 1;
+		if (document.getElementById("clickBehavior_2").checked)
+			clickBehavior = 2;
+	}
+	FoxAgeSvc.setPref("clickBehavior", clickBehavior);
 }
 
 function onUpwardMarginChange(event) {

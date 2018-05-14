@@ -413,8 +413,19 @@ async function doCommand(aCommand, aItem, aOption) {
 				}
 			}
 			else if (aItem.type == FoxAgeUtils.TYPE_THREAD) {
-				// スレの左クリック、中クリック
-				FoxAgeSvc.openItem(aItem, aOption == 1);
+				let inNewTab, active;
+				// スレの左クリック
+				if (aOption == 0) {
+					let clickBehavior = FoxAgeSvc.getPref("clickBehavior");
+					inNewTab = clickBehavior >= 1;
+					active = clickBehavior == 2;
+				}
+				// スレの中クリック
+				else if (aOption == 1) {
+					inNewTab = true;
+					active = false;	// 決め打ちでいいか？
+				}
+				FoxAgeSvc.openItem(aItem, inNewTab, active);
 			}
 			break;
 		// @param aOption URL

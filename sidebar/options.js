@@ -117,7 +117,7 @@ function onRestoreButton(event) {
 function onLinksClick(event) {
 	var url = event.target.getAttribute("href");
 	if (url)
-		browser.tabs.create({ url: url, active: true });
+		browser.tabs.create({ url, active: true });
 }
 
 window.addEventListener("load", init, { once: true });

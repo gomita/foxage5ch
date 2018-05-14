@@ -7,6 +7,7 @@ var gSearchTimer;
 var gMainTree;
 var gSubTree;
 var gPopup;
+var gDragOverString;
 
 function init() {
 	localize();
@@ -233,8 +234,6 @@ function onDragStart(event) {
 	dt.dropEffect = "move";
 }
 
-var _lastDragOver = "";
-
 // dragover/dropイベント発生元の要素aTargetに対するドロップが可能か
 function canDrop(aTarget, aBeforeAfter) {
 	// ２ペーンの場合、メインツリーに対するドロップのみ許可
@@ -260,18 +259,15 @@ function canDrop(aTarget, aBeforeAfter) {
 function onDragOver(event) {
 	event.preventDefault();
 	var dt = event.dataTransfer;
-	var itemId = dt.getData(FoxAgeUtils.DROP_TYPE);
-	if (!itemId)
-		return;
 	if (event.target.localName != "li")
 		return;
 	let rect = event.target.getBoundingClientRect();
 	let beforeAfter = event.clientY < rect.top + rect.height / 2 ? -1 : 1;
 	// 過剰なdragover処理を避けるため、文字列「drop_{before|after}:<id>」が前回と一致している場合は何もしない
-	let lastDragOver = "drop_" + (beforeAfter < 0 ? "before" : "after") + ":" + event.target.id;
-	if (_lastDragOver == lastDragOver)
+	let str = "drop_" + (beforeAfter < 0 ? "before" : "after") + ":" + event.target.id;
+	if (gDragOverString == str)
 		return;
-	_lastDragOver = lastDragOver;
+	gDragOverString = str;
 	// ドロップインジケータの表示／非表示
 	var dropline = document.getElementById("dropline");
 	if (canDrop(event.target, beforeAfter)) {
@@ -281,12 +277,12 @@ function onDragOver(event) {
 	else {
 		dropline.hidden = true;
 	}
-	console.log(_lastDragOver);	// #debug
+	console.log(gDragOverString);	// #debug
 }
 
 function onDragLeave(event) {
 	document.getElementById("dropline").hidden = true;
-	_lastDragOver = "";
+	gDragOverString = "";
 }
 
 async function onDrop(event) {
@@ -297,10 +293,10 @@ async function onDrop(event) {
 	var itemId = dt.getData(FoxAgeUtils.DROP_TYPE);
 	if (itemId) {
 		// beforeAfterの計算は面倒なので_lastDragOver文字列から採取
-		if (!/^drop_(\w+):/.test(_lastDragOver))
+		if (!/^drop_(\w+):/.test(gDragOverString))
 			return;
-		_lastDragOver = "";
 		let beforeAfter = RegExp.$1 == "before" ? -1 : 1;
+		gDragOverString = "";
 		if (!canDrop(event.target, beforeAfter))
 			return;
 		let dragItem = FoxAgeSvc.getItem(itemId);
@@ -471,9 +467,11 @@ function elementForItem(item) {
 	// BBS
 	if (item.type == FoxAgeUtils.TYPE_BOARD) {
 		switch (item.bbs) {
+//			case FoxAgeUtils.BBS_5CH  : elt.classList.add("bbs5ch"); break;
 			case FoxAgeUtils.BBS_PINK : elt.classList.add("pink"); break;
 			case FoxAgeUtils.BBS_MACHI: elt.classList.add("machi"); break;
 			case FoxAgeUtils.BBS_JBBS : elt.classList.add("jbbs"); break;
+			default: elt.classList.add("unknown"); break;
 		}
 	}
 	// ステータス

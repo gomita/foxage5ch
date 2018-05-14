@@ -19,7 +19,6 @@
 	"no_updated": { "message": "No updates" },
 	"busy_wait": { "message": "Please wait for $1 seconds" },
 	"done": { "message": "Done" },
-//	"abort": { "message": "Aborted" },
 	"error": { "message": "Failed" },
 	"get_title": { "message": "Fetching title" },
 	"add_result": { "message": "$1 item(s) added." },

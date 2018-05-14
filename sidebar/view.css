@@ -141,29 +141,34 @@ li.exclude  { color: deeppink; }
 /* ::::: 板 ::::: */
 
 li[type="board"] {
-	background-image: url('chrome://browser/skin/places/folder.svg');
+	background-size: 16px;
 	background-repeat: no-repeat;
 	background-position: 4px center;
 	padding-left: 24px;
 }
 
+li[type="board"].bbs5ch {
+	background-image: url("http://5ch.net/favicon.ico");
+}
+
 li[type="board"].pink {
 	background-image: url("http://deleter.bbspink.com/favicon.ico");
-	background-size: 16px;
 }
 
 li[type="board"].machi {
 	background-image: url("http://www.machi.to/favicon.ico");
-	background-size: 16px;
 }
 
 li[type="board"].jbbs {
 	background-image: url("http://jbbs.shitaraba.net/favicon.ico");
-	background-size: 16px;
 }
 
 li[type="board"].checking {
 	background-image: url('../icons/loading.png');
+}
+
+li[type="board"].unknown {
+	background-image: url('chrome://browser/skin/places/folder.svg');
 }
 
 /* ::::: 区切り ::::: */

@@ -19,7 +19,6 @@
 	"no_updated": { "message": "(´･ω･｀) 更新なし" },
 	"busy_wait": { "message": "(´ｰ`).｡ｏＯ（あと$1秒待って）" },
 	"done": { "message": "（･∀･）完了" },
-//	"abort": { "message": "(´･ω･｀) 中断しました" },
 	"error": { "message": "(´･ω･｀) エラー" },
 	"get_title": { "message": "ε三（; ･∀･）タイトル取得中" },
 	"add_result": { "message": "$1 アイテム追加しました" },

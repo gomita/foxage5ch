@@ -283,7 +283,7 @@ var FoxAgeSvc = {
 			// 板を削除した場合、ルートのdat落ちスレッド数を更新する
 			this._updateRootStats();
 		this._flushDataWithDelay();
-		this._notify("show-message", browser.i18n.getMessage("delete_result", removedCount));
+		this._notify("show-message", browser.i18n.getMessage("delete_result", [removedCount]));
 		return this._notify("rebuild-tree");
 	},
 
@@ -491,7 +491,7 @@ var FoxAgeSvc = {
 			dat2thread.delete(dat);
 		}
 		// メッセージ表示
-		var msg = unread > 0 ? browser.i18n.getMessage("updated", unread)
+		var msg = unread > 0 ? browser.i18n.getMessage("updated", [unread])
 		                     : browser.i18n.getMessage("no_updated");
 		this._notify("show-message", msg + ": " + aBoardItem.title);
  		// 板のプロパティを更新
@@ -605,7 +605,7 @@ var FoxAgeSvc = {
 				// チェック開始～抑止時間表示まで、あえて少しの時間をはさむ
 				this._removeStatusFlag(boardItem, FoxAgeUtils.STATUS_CHECKING);
 				this._notify("rebuild-tree", boardItem.id);
-				this._notify("show-message", browser.i18n.getMessage("busy_wait", LOCK_TIME - diffTime));
+				this._notify("show-message", browser.i18n.getMessage("busy_wait", [LOCK_TIME - diffTime]));
 				// 次のキューへ
 				this._checkUpdatesNext();
 			}, CHECK_INTERVAL);

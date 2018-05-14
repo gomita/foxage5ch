@@ -326,6 +326,10 @@ var FoxAgeSvc = {
 				await browser.tabs.update(tabs[0].id, { url, active: true });
 		}
 		else {
+			// 現在のタブがピン留めの場合は強制的に新しいタブで開く
+			var tabs = await browser.tabs.query({ active: true, currentWindow: true });
+			if (tabs[0].pinned)
+				aInNewTab = true;
 			if (aInNewTab)
 				await browser.tabs.create({ url, active: aActive });
 			else

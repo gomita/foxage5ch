@@ -15,6 +15,7 @@ function init() {
 	document.addEventListener("contextmenu", onContextMenu);
 	document.addEventListener("click", onClick);
 	document.addEventListener("keypress", onKeyPress);
+	document.addEventListener("wheel", onWheel);
 	document.addEventListener("dragstart", onDragStart);
 	document.addEventListener("dragover", onDragOver);
 	document.addEventListener("dragleave", onDragLeave);
@@ -45,6 +46,7 @@ function uninit() {
 	document.removeEventListener("contextmenu", onContextMenu);
 	document.removeEventListener("click", onClick);
 	document.removeEventListener("keypress", onKeyPress);
+	document.removeEventListener("wheel", onWheel);
 	document.removeEventListener("dragstart", onDragStart);
 	document.removeEventListener("dragover", onDragOver);
 	document.removeEventListener("dragleave", onDragLeave);
@@ -213,6 +215,12 @@ function onKeyPress(event) {
 		case event.DOM_VK_DOWN  : setTreeSelection(elt.nextSibling, true); break;
 		default: 
 	}
+}
+
+function onWheel(event) {
+	// 拡大／縮小を抑止
+	if (event.ctrlKey || event.metaKey)
+		event.preventDefault();
 }
 
 function onDragStart(event) {

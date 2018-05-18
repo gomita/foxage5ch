@@ -163,12 +163,12 @@ li[type="board"].jbbs {
 	background-image: url("http://jbbs.shitaraba.net/favicon.ico");
 }
 
-li[type="board"].checking {
-	background-image: url('../icons/loading.png');
-}
-
 li[type="board"].unknown {
 	background-image: url('chrome://browser/skin/places/folder.svg');
+}
+
+li[type="board"].checking {
+	background-image: url('../icons/loading.png');
 }
 
 /* ::::: 区切り ::::: */

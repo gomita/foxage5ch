@@ -219,12 +219,12 @@ function onAddButtonClick(event) {
 
 function onKeyPress(event) {
 	clearTimeout(gSearchTimer);
-	if (event.keyCode == event.DOM_VK_ESCAPE && event.target.value) {
+	if (event.keyCode == (event.DOM_VK_ESCAPE || 27) && event.target.value) {
 		event.stopPropagation();
 		event.target.value = "";
 		execSearch();
 	}
-	else if (event.keyCode == event.DOM_VK_RETURN) {
+	else if (event.keyCode == (event.DOM_VK_RETURN || 13)) {
 		execSearch();
 	}
 }

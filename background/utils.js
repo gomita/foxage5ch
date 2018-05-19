@@ -20,6 +20,13 @@ var FoxAgeUtils = {
 
 	DROP_TYPE: "text/foxage-item-id",
 
+	_isFirefox: null,
+	get isFirefox() {
+		if (!this._isFirefox)
+			this._isFirefox = "sidebarAction" in browser;
+		return this._isFirefox;
+	},
+
 	// 「http://...http://」のようにビューアやWebサービスによってラップされたURLについて、
 	// 最後のhttp://以降をURLとみなして返す
 	unwrapURL: function(aURL) {
@@ -253,7 +260,8 @@ HTTPRequest.prototype = {
 		this._request.open("GET", aURL, true);
 		this._request.timeout = 30 * 1000;
 		this._request.setRequestHeader("Cache-Control", "no-cache");
-		this._request.setRequestHeader("User-Agent", "Monazilla/1.00 (FoxAge5ch)");
+		if (this.isFirefox)
+			this._request.setRequestHeader("User-Agent", "Monazilla/1.00 (FoxAge5ch)");
 		this._request.overrideMimeType("text/plain; charset=" + charset);
 		this._request.send(null);
 	},

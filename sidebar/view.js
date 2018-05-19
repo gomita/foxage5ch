@@ -137,42 +137,43 @@ async function onClick(event) {
 		}
 		return;
 	}
+	// idを有する直近の要素を取得
+	let target = event.target.closest("[id]");
 	// ツールバーボタンのクリック
-	if (event.button == 0 && event.target.id == "checkUpdatesButton" ) {
-		if (event.target.getAttribute("checked") == "true")
+	if (event.button == 0 && target.id == "checkUpdatesButton") {
+		if (target.getAttribute("checked") == "true")
 			FoxAgeSvc.abortCheckUpdates();
 		else
 			FoxAgeSvc.checkUpdates("root");
 	}
-	else if (event.button == 0 && event.target.id == "openUpdatesButton") {
-		if (event.target.getAttribute("checked") == "true")
+	else if (event.button == 0 && target.id == "openUpdatesButton") {
+		if (target.getAttribute("checked") == "true")
 			FoxAgeSvc.cancelOpenUpdates();
 		else
 			FoxAgeSvc.openUpdates("root");
 	}
-	else if (event.button == 0 && event.target.id == "subscribeButton") {
+	else if (event.button == 0 && target.id == "subscribeButton") {
 		var tabs = await browser.tabs.query({ currentWindow: true, active: true });
 		doCommand("subscribe", null, tabs[0].url);
 	}
-	else if (event.button == 0 && event.target.id == "toolsButton" ) {
+	else if (event.button == 0 && target.id == "toolsButton" ) {
 		showLayer("sidebar/options.html");
 	}
 	// サブペーンタイトルのクリック
-	else if (event.button == 0 && 
-	        (event.target.id == "subTitle" || event.target.id == "subTitleText")) {
+	else if (event.button == 0 && (target.id == "subTitle" || target.id == "subTitleText")) {
 		var elt = document.getElementById(gSubTree.getAttribute("itemId"));
 		setTreeSelection(elt, true);
 	}
 	// サブペーン閉じるボタンのクリック
-	else if (event.button == 0 && event.target.id == "subTitleButton") {
+	else if (event.button == 0 && target.id == "subTitleButton") {
 		hideSubPane();
 	}
 	// カバー余白のクリック
-	else if (event.target.id == "layer") {
+	else if (target.id == "layer") {
 		hideLayer();
 	}
 	// ツリーのクリック
-	else if (event.target.localName == "li") {
+	else if (target.localName == "li") {
 		setTreeSelection(event.target);
 		var item = FoxAgeSvc.getItem(event.target.id);
 		var button = (event.ctrlKey || event.shiftKey) ? 1 : event.button;
@@ -267,7 +268,6 @@ function canDrop(aTarget, aBeforeAfter) {
 
 function onDragOver(event) {
 	event.preventDefault();
-	var dt = event.dataTransfer;
 	if (event.target.localName != "li")
 		return;
 	let rect = event.target.getBoundingClientRect();

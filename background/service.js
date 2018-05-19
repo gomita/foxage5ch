@@ -28,7 +28,8 @@ var FoxAgeSvc = {
 		// データ読み込み完了後にツリー再描画
 		this._notify("rebuild-tree");
 		browser.browserAction.onClicked.addListener(this._handleBrowserAction);
-//		browser.runtime.onSuspend.addListener(this._destroy);
+		if (!FoxAgeUtils.isFirefox)
+			chrome.runtime.onSuspend.addListener(this._destroy);
 //		browser.storage.onChanged.addListener(function(changes, area) {
 //			LOG("storage." + area + " changed: \n" + changes.toSource());
 //		});
@@ -38,7 +39,8 @@ var FoxAgeSvc = {
 		LOG("service destroy");	// #debug
 		this.abortCheckUpdates();
 		this.cancelOpenUpdates();
-//		browser.runtime.onSuspend.removeListener(this._destroy);
+		if (!FoxAgeUtils.isFirefox)
+			chrome.runtime.onSuspend.removeListener(this._destroy);
 		browser.browserAction.onClicked.removeListener(this._handleBrowserAction);
 		if (this._flushTimer) {
 			this._flushData();
@@ -897,14 +899,21 @@ var FoxAgeSvc = {
 	_handleBrowserAction: async function(tab) {
 		if (FoxAgeSvc.getPref("browserAction") == 0) {
 			// サイドバーで開く
+			if (FoxAgeUtils.isFirefox) {
+				// [Firefox] 面倒なのでひとまずはサイドバーを開くだけにする
 /*
-			// 非同期になるとイベントハンドラとは別の制約を受けるため動作しない
-			let open = await browser.sidebarAction.isOpen({});
-			open ? browser.sidebarAction.close()
-			     : browser.sidebarAction.open();
+				// 非同期になるとイベントハンドラとは別の制約を受けるため動作しない
+				let open = await browser.sidebarAction.isOpen({});
+				open ? browser.sidebarAction.close()
+				     : browser.sidebarAction.open();
 */
-			// 面倒なのでひとまずはサイドバーを開くだけにする
-			browser.sidebarAction.open();
+				browser.sidebarAction.open();
+			}
+			else {
+				// [Chrome] ポップアップを開く
+				let url = chrome.runtime.getURL("sidebar/view.html");
+				chrome.browserAction.setPopup({ popup: url });
+			}
 		}
 		else {
 			// タブで開く

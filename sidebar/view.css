@@ -1,5 +1,10 @@
 /* ::::: コンテナ ::::: */
 
+:root[popup] body {
+	width: 20em;
+	height: 50em;
+}
+
 #container {
 	height: 100vh;
 	display: flex;
@@ -167,8 +172,12 @@ li[type="board"].unknown {
 	background-image: url('chrome://browser/skin/places/folder.svg');
 }
 
+:root[chrome] li[type="board"].unknown {
+	background-image: url('/icons/folder-chrome.svg');
+}
+
 li[type="board"].checking {
-	background-image: url('../icons/loading.png');
+	background-image: url('../icons/loading.png') !important;
 }
 
 /* ::::: 区切り ::::: */
@@ -294,10 +303,24 @@ li[type="thread"].datout {
 	display: none;
 }
 
+:root[chrome] #popup[nodeType="2"] :-webkit-any(
+	#popup_checkUpdates, #popup_openUpdates, 
+	#popup_sep1, #popup_newSeparator, #popup_sep3, 
+	#popup_findThread, #popup_transfer) {
+	display: none;
+}
+
 /* 区切り */
 #popup[nodeType="3"] :-moz-any(#popup_open, #popup_openInTab, #popup_sep2, 
                                #popup_fetchTitle, #popup_findThread, 
                                #popup_transfer, #popup_findNext, #popup_sep4) {
+	display: none;
+}
+
+:root[chrome] #popup[nodeType="3"] :-webkit-any(
+	#popup_open, #popup_openInTab, #popup_sep2, 
+	#popup_fetchTitle, #popup_findThread, 
+	#popup_transfer, #popup_findNext, #popup_sep4) {
 	display: none;
 }
 

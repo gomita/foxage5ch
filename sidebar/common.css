@@ -10,6 +10,7 @@ html, body {
 	flex-direction: column;
 	margin: 0;
 	padding: 0;
+	user-select: none;
 	-moz-user-select: none;
 }
 
@@ -17,6 +18,11 @@ body * {
 	box-sizing: border-box;
 	text-align: start;
 	font: caption;
+}
+
+:root[chrome] body * {
+	font: MessageBox;
+	font-size: 1em;
 }
 
 body[preload] {

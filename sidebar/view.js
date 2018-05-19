@@ -35,6 +35,8 @@ async function init() {
 			setTreeSelection(item);
 		}
 	}
+	if (window.location.hash == "#popup")
+		document.documentElement.setAttribute("popup", "true");
 }
 
 function uninit() {

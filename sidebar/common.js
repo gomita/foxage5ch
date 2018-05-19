@@ -14,6 +14,7 @@ function getService() {
 		let win = chrome.extension.getBackgroundPage();
 		window.FoxAgeSvc = win.FoxAgeSvc;
 		window.FoxAgeUtils = win.FoxAgeUtils;
+		document.documentElement.setAttribute("chrome", "true");
 	}
 }
 

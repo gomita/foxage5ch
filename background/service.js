@@ -911,7 +911,7 @@ var FoxAgeSvc = {
 			}
 			else {
 				// [Chrome] ポップアップを開く
-				let url = chrome.runtime.getURL("sidebar/view.html");
+				let url = chrome.runtime.getURL("sidebar/view.html#popup");
 				chrome.browserAction.setPopup({ popup: url });
 			}
 		}

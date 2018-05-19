@@ -1,13 +1,21 @@
 ////////////////////////////////////////////////////////////////////////////////
 // background
 
-var FoxAgeSvc;
-var FoxAgeUtils;
-
-browser.runtime.getBackgroundPage(win => {
-	FoxAgeSvc = win.FoxAgeSvc;
-	FoxAgeUtils = win.FoxAgeUtils;
-});
+function getService() {
+	if ("sidebarAction" in browser) {
+		// [Firefox]
+		return browser.runtime.getBackgroundPage(win => {
+			window.FoxAgeSvc = win.FoxAgeSvc;
+			window.FoxAgeUtils = win.FoxAgeUtils;
+		});
+	}
+	else {
+		// [Chrome]
+		let win = chrome.extension.getBackgroundPage();
+		window.FoxAgeSvc = win.FoxAgeSvc;
+		window.FoxAgeUtils = win.FoxAgeUtils;
+	}
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // global

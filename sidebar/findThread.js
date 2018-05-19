@@ -8,7 +8,8 @@ var gLogger;
 var gRequest;
 var gSearchTimer;
 
-function init() {
+async function init() {
+	await getService();
 	localize();
 	captureKeyEvents();
 	disableContextMenu();

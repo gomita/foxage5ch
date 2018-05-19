@@ -5,7 +5,8 @@ var gBoardItem;
 var gLogger;
 var gRequest;
 
-function init() {
+async function init() {
+	await getService();
 	localize();
 	captureKeyEvents();
 	disableContextMenu();

@@ -9,7 +9,8 @@ var gSubTree;
 var gPopup;
 var gDragOverString;
 
-function init() {
+async function init() {
+	await getService();
 	localize();
 	document.addEventListener("mousedown", onMouseDown);
 	document.addEventListener("contextmenu", onContextMenu);

@@ -1,7 +1,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 // global
 
-function init() {
+async function init() {
+	await getService();
 	localize();
 	captureKeyEvents();
 	disableContextMenu();

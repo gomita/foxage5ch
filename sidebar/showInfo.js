@@ -4,7 +4,8 @@
 var gItem;
 var gChanged = false;
 
-function init() {
+async function init() {
+	await getService();
 	localize();
 	captureKeyEvents();
 	disableContextMenu();

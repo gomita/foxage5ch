@@ -7,7 +7,8 @@ var gSearchTimer;
 var gMainTree;
 var gSubTree;
 var gPopup;
-var gDragOverString;
+var gDragOverString = "";
+var gDragLeaveTimer = 0;
 
 async function init() {
 	await getService();
@@ -268,6 +269,8 @@ function canDrop(aTarget, aBeforeAfter) {
 }
 
 function onDragOver(event) {
+	if (gDragLeaveTimer)
+		clearTimeout(gDragLeaveTimer);
 	event.preventDefault();
 	if (event.target.localName != "li")
 		return;
@@ -291,8 +294,10 @@ function onDragOver(event) {
 }
 
 function onDragLeave(event) {
-	document.getElementById("dropline").hidden = true;
-	gDragOverString = "";
+	gDragLeaveTimer = setTimeout(() => {
+		document.getElementById("dropline").hidden = true;
+		gDragOverString = "";
+	}, 10);
 }
 
 async function onDrop(event) {

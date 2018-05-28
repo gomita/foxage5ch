@@ -19,6 +19,10 @@
 	flex: 6;
 }
 
+img {
+	pointer-events: none;
+}
+
 /* ::::: ステータスバー ::::: */
 
 #statusbar {

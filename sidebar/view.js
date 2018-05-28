@@ -94,53 +94,52 @@ function onContextMenu(event) {
 async function onClick(event) {
 	if (event.button == 2)
 		return;
+	let target = event.target;
 	// ポップアップ
 	if (!gPopup.hidden) {
 		// ポップアップ枠や区切りをクリックしたとき、何もしない
-		if (event.target == gPopup || event.target.localName == "hr")
+		if (target == gPopup || target.localName == "hr")
 			return;
 		// この時点でポップアップは先に閉じる
 		// ポップアップ外をクリックした場合もクリックを消費してポップアップを閉じる
 		var item = FoxAgeSvc.getItem(gPopup.getAttribute("nodeId"));
 		hidePopup();
 		// コマンド実行
-		if (event.button == 0 && event.target.id == "popup_checkUpdates") {
+		if (event.button == 0 && target.id == "popup_checkUpdates") {
 			FoxAgeSvc.checkUpdates(item.id);
 		}
-		else if (event.button == 0 && event.target.id == "popup_openUpdates") {
+		else if (event.button == 0 && target.id == "popup_openUpdates") {
 			FoxAgeSvc.openUpdates(item.id);
 		}
-		else if (event.target.id == "popup_open") {
+		else if (target.id == "popup_open") {
 			FoxAgeSvc.openItem(item, event.ctrlKey || event.shiftKey || event.button == 1);
 		}
-		else if (event.target.id == "popup_openInTab") {
+		else if (target.id == "popup_openInTab") {
 			FoxAgeSvc.openItem(item, true);
 		}
-		else if (event.button == 0 && event.target.id == "popup_newSeparator") {
+		else if (event.button == 0 && target.id == "popup_newSeparator") {
 			doCommand("newSeparator", item);
 		}
-		else if (event.button == 0 && event.target.id == "popup_fetchTitle") {
+		else if (event.button == 0 && target.id == "popup_fetchTitle") {
 			FoxAgeSvc.fetchTitle(item);
 		}
-		else if (event.button == 0 && event.target.id == "popup_findThread") {
+		else if (event.button == 0 && target.id == "popup_findThread") {
 			showLayer("sidebar/findThread.html?" + item.id);
 		}
-		else if (event.button == 0 && event.target.id == "popup_findNext") {
+		else if (event.button == 0 && target.id == "popup_findNext") {
 			showLayer("sidebar/findThread.html?" + item.id);
 		}
-		else if (event.button == 0 && event.target.id == "popup_transfer") {
+		else if (event.button == 0 && target.id == "popup_transfer") {
 			showLayer("sidebar/transfer.html?" + item.id);
 		}
-		else if (event.button == 0 && event.target.id == "popup_delete") {
+		else if (event.button == 0 && target.id == "popup_delete") {
 			doCommand("delete", item);
 		}
-		else if (event.button == 0 && event.target.id == "popup_showInfo") {
+		else if (event.button == 0 && target.id == "popup_showInfo") {
 			doCommand("showInfo", item);
 		}
 		return;
 	}
-	// idを有する直近の要素を取得
-	let target = event.target.closest("[id]");
 	// ツールバーボタンのクリック
 	if (event.button == 0 && target.id == "checkUpdatesButton") {
 		if (target.getAttribute("checked") == "true")
@@ -176,8 +175,8 @@ async function onClick(event) {
 	}
 	// ツリーのクリック
 	else if (target.localName == "li") {
-		setTreeSelection(event.target);
-		var item = FoxAgeSvc.getItem(event.target.id);
+		setTreeSelection(target);
+		var item = FoxAgeSvc.getItem(target.id);
 		var button = (event.ctrlKey || event.shiftKey) ? 1 : event.button;
 		doCommand("open", item, button);
 	}

@@ -53,7 +53,7 @@ button:hover {
 	background-color: rgba(12, 12, 13, 0.1);
 }
 
-/* button:active‚ª‚È‚º‚©Œø‚©‚È‚¢ */
+/* button:activeãŒãªãœã‹åŠ¹ã‹ãªã„ */
 button:active, button[checked] {
 	background-color: rgba(12, 12, 13, 0.2);
 }

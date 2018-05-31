@@ -886,14 +886,6 @@ var FoxAgeSvc = {
 		}
 		catch (ex) {
 			var msg = "";
-/*
-			switch (ex.message) {
-				case "invalid URL"   : msg = "invalid_URL"; break;
-				case "already exists": msg = "already_added"; break;
-				default              : msg = "error"; break;
-			}
-			this._notify("show-message", browser.i18n.getMessage(msg));
-*/
 			if (ex.message == "invalid URL")
 				msg = browser.i18n.getMessage("invalid_URL") + ": " + aURL;
 			else if (ex.message == "already exists")
@@ -942,13 +934,13 @@ var FoxAgeSvc = {
 			if (tabs.length > 0)
 				browser.tabs.update(tabs[0].id, { active });
 			else
-				browser.tabs.create({ url, active });
+				browser.tabs.create({ url: url + "#tab", active });
 		}
 	},
 
 	// メッセージ送信→応答→Promiseを返す
-	_notify: function(aTopic, aValue) {
-		return browser.runtime.sendMessage({ topic: aTopic, value: aValue });
+	_notify: function(topic, value) {
+		return browser.runtime.sendMessage({ topic, value });
 	},
 
 };

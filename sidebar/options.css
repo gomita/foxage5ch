@@ -83,6 +83,10 @@ input[type="radio"], input[type="checkbox"] {
 	cursor: pointer;
 }
 
+:root[browser="Chrome"] .link {
+	color: blue;
+}
+
 .link:hover {
 	text-decoration: underline;
 }

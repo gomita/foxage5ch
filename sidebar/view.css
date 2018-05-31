@@ -1,7 +1,13 @@
 /* ::::: コンテナ ::::: */
 
 :root[popup] body {
-	width: 20em;
+	width: 16em;
+	height: 50em;
+	overflow: hidden;
+}
+
+:root[browser="Chrome"][popup] body {
+	width: 24em;
 	height: 50em;
 }
 

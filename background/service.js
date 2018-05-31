@@ -27,6 +27,7 @@ var FoxAgeSvc = {
 		await this._readData();
 		// データ読み込み完了後にツリー再描画
 		this._notify("rebuild-tree");
+		this.setPopupURL();
 		browser.browserAction.onClicked.addListener(this._handleBrowserAction);
 		if (!FoxAgeUtils.isFirefox)
 			chrome.runtime.onSuspend.addListener(this._destroy);
@@ -903,27 +904,37 @@ var FoxAgeSvc = {
 		}
 	},
 
-	// ツールバーボタンクリック時
-	_handleBrowserAction: async function(tab) {
-		if (FoxAgeSvc.getPref("browserAction") == 0) {
-			// サイドバーで開く
-			if (FoxAgeUtils.isFirefox) {
-				// [Firefox] 面倒なのでひとまずはサイドバーを開くだけにする
-/*
-				// 非同期になるとイベントハンドラとは別の制約を受けるため動作しない
-				let open = await browser.sidebarAction.isOpen({});
-				open ? browser.sidebarAction.close()
-				     : browser.sidebarAction.open();
-*/
-				browser.sidebarAction.open();
-			}
-			else {
-				// [Chrome] ポップアップを開く
-				let url = chrome.runtime.getURL("sidebar/view.html#popup");
-				chrome.browserAction.setPopup({ popup: url });
-			}
+	// browser actionで開くポップアップのURLをセット
+	setPopupURL: function() {
+		let browserAction = FoxAgeSvc.getPref("browserAction");
+		// [Chrome] サイドバーで開けない代わりにポップアップで開く
+		if (!FoxAgeUtils.isFirefox && browserAction == 0)
+			browserAction = 2;
+		if (browserAction == 2) {
+			let url = browser.runtime.getURL("sidebar/view.html#popup");
+			browser.browserAction.setPopup({ popup: url });
 		}
 		else {
+			// ポップアップを無効化
+			browser.browserAction.setPopup({ popup: "" });
+		}
+	},
+
+	// ツールバーボタンクリック時
+	_handleBrowserAction: async function(tab) {
+		let browserAction = FoxAgeSvc.getPref("browserAction");
+		// [Chrome] サイドバーで開けない代わりにポップアップで開く
+		if (!FoxAgeUtils.isFirefox && browserAction == 0)
+			browserAction = 2;
+		if (browserAction == 0) {
+			// サイドバーで開く
+			browser.sidebarAction.open();
+		}
+		else if (browserAction == 2) {
+			// ポップアップで開く
+			browser.browserAction.openPopup();
+		}
+		else if (browserAction == 1) {
 			// タブで開く
 			let url = browser.runtime.getURL("sidebar/view.html");
 			let active = true;

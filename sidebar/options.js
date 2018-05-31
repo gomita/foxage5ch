@@ -8,6 +8,7 @@ async function init() {
 	disableContextMenu();
 	document.getElementById("browserAction_0").onchange = onBrowserActionChange;
 	document.getElementById("browserAction_1").onchange = onBrowserActionChange;
+	document.getElementById("browserAction_2").onchange = onBrowserActionChange;
 	document.getElementById("treeMode_0").onchange = onTreeModeChange;
 	document.getElementById("treeMode_1").onchange = onTreeModeChange;
 	document.getElementById("maxRequests").onchange = onMaxRequestsChange;
@@ -21,6 +22,9 @@ async function init() {
 	document.getElementById("links").onclick = onLinksClick;
 	// 初期選択
 	var browserAction = FoxAgeSvc.getPref("browserAction");
+	// [Chrome] サイドバーで開けない代わりにポップアップで開く
+	if (!FoxAgeUtils.isFirefox && browserAction == 0)
+		browserAction = 2;
 	document.getElementById("browserAction_" + browserAction).checked = true;
 	var treeMode = FoxAgeSvc.getPref("treeMode");
 	document.getElementById("treeMode_" + treeMode).checked = true;
@@ -54,6 +58,7 @@ function uninit() {
 
 function onBrowserActionChange(event) {
 	FoxAgeSvc.setPref("browserAction", parseInt(event.target.value, 10));
+	FoxAgeSvc.setPopupURL();
 }
 
 function onTreeModeChange(event) {

@@ -93,3 +93,10 @@ input[type="radio"], input[type="checkbox"] {
 	white-space: nowrap;
 }
 
+/* ::::: [Chrome] ::::: */
+
+:root[browser="Chrome"] #browserAction_0,
+:root[browser="Chrome"] [for="browserAction_0"] {
+	display: none;
+}
+

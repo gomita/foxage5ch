@@ -54,8 +54,9 @@
 	"add": { "message": "追加" },
 	// options
 	"browserAction": { "message": "ツールバーボタンの動作" },
-	"browserAction_0": { "message": "サイドバーで開く" },
-	"browserAction_1": { "message": "タブで開く" },
+	"browserAction_0": { "message": "サイドバー" },
+	"browserAction_1": { "message": "タブ" },
+	"browserAction_2": { "message": "ポップアップ" },
 	"treeMode": { "message": "ツリー表示" },
 	"treeMode_0": { "message": "通常ツリー" },
 	"treeMode_1": { "message": "２ペイン" },

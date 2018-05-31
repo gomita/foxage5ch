@@ -15,6 +15,7 @@ async function init() {
 	localize();
 	document.addEventListener("mousedown", onMouseDown);
 	document.addEventListener("contextmenu", onContextMenu);
+	document.addEventListener("auxclick", onAuxClick);
 	document.addEventListener("click", onClick);
 	document.addEventListener("keypress", onKeyPress);
 	document.addEventListener("wheel", onWheel);
@@ -48,6 +49,7 @@ function uninit() {
 	browser.runtime.onMessage.removeListener(onMessage);
 	document.removeEventListener("mousedown", onMouseDown);
 	document.removeEventListener("contextmenu", onContextMenu);
+	document.removeEventListener("auxclick", onAuxClick);
 	document.removeEventListener("click", onClick);
 	document.removeEventListener("keypress", onKeyPress);
 	document.removeEventListener("wheel", onWheel);
@@ -92,8 +94,13 @@ function onContextMenu(event) {
 		showPopup(event);
 }
 
+function onAuxClick(event) {
+	if (event.button == 1)
+		onClick(event);
+}
+
 async function onClick(event) {
-	if (event.button == 2)
+	if (event.type == "click" && event.button != 0)
 		return;
 	let target = event.target;
 	// ポップアップ

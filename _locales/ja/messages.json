@@ -71,6 +71,7 @@
 	"backup": { "message": "バックアップ" },
 	"restore": { "message": "復元" },
 	"restore_confirm": { "message": "復元しますか？" },
+	"restore_workaround": { "message": "諸事情により、通常の設定ページから復元してください。" },
 	"links": { "message": "リンク" },
 	"homepage": { "message": "ホームページ" },
 	"5chBBS": { "message": "５ちゃんねる" }

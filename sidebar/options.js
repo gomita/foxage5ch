@@ -48,6 +48,17 @@ async function init() {
 		document.getElementById("backButton").onclick = window.top.hideLayer;
 		fitToContent();
 	}
+	// [Firefox] ポップアップ上でファイル選択ダイアログを開くとポップアップが閉じてしまうので、
+	// しかたなく通常の設定ページを開きなおす
+	if (FoxAgeUtils.isFirefox && window.top.location.hash == "#popup") {
+		let restoreButton = document.getElementById("restoreButton");
+		restoreButton.setAttribute("type", "button");
+		restoreButton.onclick = event => {
+			alert(browser.i18n.getMessage("restore_workaround"));
+			browser.runtime.openOptionsPage();
+			window.top.close();
+		};
+	}
 	document.body.setAttribute("preload", "false");
 }
 

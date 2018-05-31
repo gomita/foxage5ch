@@ -3,6 +3,7 @@
 
 function getService() {
 	if ("sidebarAction" in browser) {
+		document.documentElement.setAttribute("browser", "Firefox");
 		// [Firefox]
 		return browser.runtime.getBackgroundPage(win => {
 			window.FoxAgeSvc = win.FoxAgeSvc;
@@ -14,7 +15,7 @@ function getService() {
 		let win = chrome.extension.getBackgroundPage();
 		window.FoxAgeSvc = win.FoxAgeSvc;
 		window.FoxAgeUtils = win.FoxAgeUtils;
-		document.documentElement.setAttribute("chrome", "true");
+		document.documentElement.setAttribute("browser", "Chrome");
 	}
 }
 

@@ -176,7 +176,7 @@ li[type="board"].unknown {
 	background-image: url('chrome://browser/skin/places/folder.svg');
 }
 
-:root[chrome] li[type="board"].unknown {
+:root[browser="Chrome"] li[type="board"].unknown {
 	background-image: url('/icons/folder-chrome.svg');
 }
 
@@ -307,7 +307,7 @@ li[type="thread"].datout {
 	display: none;
 }
 
-:root[chrome] #popup[nodeType="2"] :-webkit-any(
+:root[browser="Chrome"] #popup[nodeType="2"] :-webkit-any(
 	#popup_checkUpdates, #popup_openUpdates, 
 	#popup_sep1, #popup_newSeparator, #popup_sep3, 
 	#popup_findThread, #popup_transfer) {
@@ -321,7 +321,7 @@ li[type="thread"].datout {
 	display: none;
 }
 
-:root[chrome] #popup[nodeType="3"] :-webkit-any(
+:root[browser="Chrome"] #popup[nodeType="3"] :-webkit-any(
 	#popup_open, #popup_openInTab, #popup_sep2, 
 	#popup_fetchTitle, #popup_findThread, 
 	#popup_transfer, #popup_findNext, #popup_sep4) {

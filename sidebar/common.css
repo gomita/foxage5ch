@@ -20,7 +20,7 @@ body * {
 	font: caption;
 }
 
-:root[chrome] body * {
+:root[browser="Chrome"] body * {
 	font: MessageBox;
 	font-size: 1em;
 }

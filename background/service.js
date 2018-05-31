@@ -668,7 +668,7 @@ var FoxAgeSvc = {
 		if (this._openUpdatesQueue.indexOf(aItemId) >= 0)
 			return;
 		// 全板・各板よらず、UIへ開始メッセージ通知
-		await this._notify("open-start");
+		this._notify("open-start");
 		if (aItemId == "root") {
 			this._openUpdatesQueue = this.getChildItems("root")
 			    .filter(item => item.type == FoxAgeUtils.TYPE_BOARD)

@@ -37,6 +37,11 @@ async function init() {
 			setTreeSelection(item);
 		}
 	}
+	// 更新チェック中、更新スレ開き中なら最初からボタンを押下状態にする
+	if (FoxAgeSvc.isCheckingUpdates)
+		onMessage({ topic: "check-start" });
+	if (FoxAgeSvc.isOpeningUpdates)
+		onMessage({ topic: "open-start" });
 	if (window.location.hash == "#popup")
 		document.documentElement.setAttribute("popup", "true");
 }
@@ -402,7 +407,8 @@ function onMessage(request, sender, sendResponse) {
 		default: 
 			console.error("unknown topic: " + request.topic);	// #debug
 	}
-	sendResponse({ topic: request.topic });
+	if (sendResponse)
+		sendResponse({ topic: request.topic });
 }
 
 ////////////////////////////////////////////////////////////////////////////////

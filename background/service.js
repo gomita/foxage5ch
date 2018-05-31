@@ -516,6 +516,10 @@ var FoxAgeSvc = {
 	// 更新チェック処理中のHTTPRequestインスタンスの配列
 	_checkUpdatesRequests: [],
 
+	get isCheckingUpdates() {
+		return this._checkUpdatesQueue.length > 0;
+	},
+
 	// 現在進行中のfetchをすべて中断してキューもクリアする
 	abortCheckUpdates: function() {
 		this._checkUpdatesQueue = [];
@@ -654,6 +658,10 @@ var FoxAgeSvc = {
 
 	_openUpdatesQueue: [],
 	_openUpdatesTimer: null,
+
+	get isOpeningUpdates() {
+		return this._openUpdatesQueue.length > 0;
+	},
 
 	cancelOpenUpdates: function() {
 		if (this._openUpdatesTimer)

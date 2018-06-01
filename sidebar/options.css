@@ -78,6 +78,16 @@ input[type="radio"], input[type="checkbox"] {
 	background-color: rgba(12, 12, 13, 0.2);
 }
 
+.button[disabled], input[type="button"][disabled] {
+	color: GrayText;
+	opacity: 0.7;
+}
+
+.button[disabled]:hover, input[type="button"][disabled]:hover,
+.button[disabled]:active, input[type="button"][disabled]:active {
+	background-color: ButtonHighlight;
+}
+
 .link {
 	color: -moz-hyperlinktext;
 	cursor: pointer;

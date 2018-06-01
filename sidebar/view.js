@@ -167,8 +167,7 @@ async function onClick(event) {
 			FoxAgeSvc.openUpdates("root");
 	}
 	else if (event.button == 0 && target.id == "subscribeButton") {
-		var tabs = await browser.tabs.query({ currentWindow: true, active: true });
-		doCommand("subscribe", null, tabs[0].url);
+		showLayer("sidebar/subscribe.html");
 	}
 	else if (event.button == 0 && target.id == "toolsButton" ) {
 		showLayer("sidebar/options.html");

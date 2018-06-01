@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>FoxAge5ch</title>
+	<link rel="stylesheet" href="common.css" />
+	<link rel="stylesheet" href="options.css" />
+	<style type="text/css">
+		input[type="text"] {
+			flex: 1;
+		}
+	</style>
+</head>
+<body preload="true">
+<div id="toolbar">
+	<button id="backButton" i18n="title:back">
+		<img src="/icons/overflow-16.svg" />
+		<label for="backButton" i18n="text:back"></label>
+	</button>
+</div>
+<div id="content">
+	<h2 i18n="text:subscribe"></h2>
+	<div class="hbox">
+		<input id="addTabButton" type="button" i18n="value:addTab">
+	</div>
+	<h2 i18n="text:addURL"></h2>
+	<div class="hbox">
+		<input id="addURLText" type="text">
+	</div>
+	<div class="hbox" id="buttons">
+		<input id="execButton" type="button" i18n="value:add">
+		<input id="cancelButton" type="button" i18n="value:cancel">
+	</div>
+</div>
+<script src="/lib/browser-polyfill.js"></script>
+<script src="common.js"></script>
+<script src="subscribe.js"></script>
+</body>
+</html>

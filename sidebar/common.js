@@ -51,6 +51,9 @@ function captureKeyEvents() {
 
 function disableContextMenu() {
 	document.addEventListener("contextmenu", event => {
+		if (event.target.localName == "input" && 
+		    event.target.getAttribute("type") == "text")
+			return;
 		event.preventDefault();
 		event.stopPropagation();
 	});

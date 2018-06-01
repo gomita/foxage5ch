@@ -52,6 +52,9 @@
 	// findThread
 	"delete_org": { "message": "Delete original thread" },
 	"add": { "message": "Add" },
+	// subscribe
+	"addTab": { "message": "Add Current Tab" },
+	"addURL": { "message": "Add URL" },
 	// options
 	"browserAction": { "message": "Toolbar Button" },
 	"browserAction_0": { "message": "Sidebar" },

@@ -120,7 +120,12 @@ function execSearch() {
 			return true;
 		})
 		// スコアの降順に並べる
-		.sort((dat1, dat2) => dat1.score < dat2.score).map(dat => {
+		.sort((dat1, dat2) => {
+			if (dat1.score < dat2.score) return 1;
+			if (dat1.score > dat2.score) return -1;
+			return 0;
+		})
+		.map(dat => {
 			resultList.appendChild(elementForDat(dat, true));
 		});
 	}

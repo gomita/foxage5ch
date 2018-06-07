@@ -206,7 +206,7 @@ function onAddButtonClick(event) {
 	.map(async checkbox => {
 		let itemId  = checkbox.id;
 		let title   = checkbox.getAttribute("title");
-		let lastRes = checkbox.getAttribute("lastRes");
+		let lastRes = parseInt(checkbox.getAttribute("lastRes"), 10);
 		if (FoxAgeSvc.getItem(itemId))
 			// すでに追加済み
 			return;

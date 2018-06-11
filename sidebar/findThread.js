@@ -43,6 +43,9 @@ async function init() {
 	document.getElementById("searchkey").select();
 	gLogger = document.getElementById("logger");
 	trace(gBoardItem.title);
+	// リストの高さ調整
+	var resultList = document.getElementById("resultList");
+	resultList.style.height = (window.top.document.body.clientHeight * 0.4) + "px";
 	fitToContent();
 	document.body.setAttribute("preload", "false");
 	// subject.txt取得開始

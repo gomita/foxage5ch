@@ -197,6 +197,7 @@ async function onClick(event) {
 function onKeyDown(event) {
 	// ポップアップ上でEscキー押下
 	if (!gPopup.hidden && event.key == "Escape") {
+		event.preventDefault();
 		hidePopup();
 		return;
 	}
@@ -205,6 +206,7 @@ function onKeyDown(event) {
 		clearTimeout(gSearchTimer);
 		// Escキー押下で検索終了
 		if (event.key == "Escape") {
+			event.preventDefault();
 			event.target.value = "";
 			rebuildTree();
 		}

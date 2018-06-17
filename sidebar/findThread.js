@@ -17,7 +17,7 @@ async function init() {
 	document.getElementById("cancelButton").onclick = window.top.hideLayer;
 	document.getElementById("addButton").onclick = onAddButtonClick;
 	document.getElementById("searchkey").oninput = onInput;
-	document.getElementById("searchkey").onkeypress = onKeyPress;
+	document.getElementById("searchkey").onkeydown = onKeyDown;
 	fitToContent();
 	// URLの?以降からIDを取得
 	var item = FoxAgeSvc.getItem(window.location.search.substr(1));
@@ -54,7 +54,7 @@ async function init() {
 
 function uninit() {
 	document.getElementById("searchkey").oninput = null;
-	document.getElementById("searchkey").onkeypress = null;
+	document.getElementById("searchkey").onkeydown = null;
 	clearTimeout(gSearchTimer);
 	if (gRequest) {
 		gRequest.destroy();
@@ -225,7 +225,7 @@ function onAddButtonClick(event) {
 	window.top.hideLayer();
 }
 
-function onKeyPress(event) {
+function onKeyDown(event) {
 	clearTimeout(gSearchTimer);
 	if (event.key == "Escape" && event.target.value) {
 		event.stopPropagation();

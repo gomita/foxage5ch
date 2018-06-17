@@ -43,7 +43,7 @@ function fitToContent() {
 }
 
 function captureKeyEvents() {
-	document.addEventListener("keypress", event => {
+	document.addEventListener("keydown", event => {
 		if (event.key == "Escape") {
 			window.top.hideLayer();
 		}

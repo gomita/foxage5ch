@@ -10,7 +10,7 @@ async function init() {
 	document.getElementById("cancelButton").onclick = window.top.hideLayer;
 	document.getElementById("execButton").onclick = addURL;
 	document.getElementById("addTabButton").onclick = addTab;
-	document.addEventListener("keypress", onKeyPress);
+	document.addEventListener("keydown", onKeyDown);
 	// タブで開いている場合、現在のタブを追加するボタンを非活性にする
 	if (window.top.location.hash == "#tab") {
 		document.getElementById("addTabButton").disabled = true;
@@ -21,12 +21,12 @@ async function init() {
 }
 
 function uninit() {
-	document.removeEventListener("keypress", onKeyPress);
+	document.removeEventListener("keydown", onKeyDown);
 	FoxAgeSvc = null;
 	FoxAgeUtils = null;
 }
 
-function onKeyPress(event) {
+function onKeyDown(event) {
 	if (event.key == "Enter")
 		addURL();
 }

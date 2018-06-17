@@ -17,7 +17,7 @@ async function init() {
 	document.addEventListener("contextmenu", onContextMenu);
 	document.addEventListener("auxclick", onAuxClick);
 	document.addEventListener("click", onClick);
-	document.addEventListener("keypress", onKeyPress);
+	document.addEventListener("keydown", onKeyDown);
 	document.addEventListener("wheel", onWheel);
 	document.addEventListener("dragstart", onDragStart);
 	document.addEventListener("dragover", onDragOver);
@@ -56,7 +56,7 @@ function uninit() {
 	document.removeEventListener("contextmenu", onContextMenu);
 	document.removeEventListener("auxclick", onAuxClick);
 	document.removeEventListener("click", onClick);
-	document.removeEventListener("keypress", onKeyPress);
+	document.removeEventListener("keydown", onKeyDown);
 	document.removeEventListener("wheel", onWheel);
 	document.removeEventListener("dragstart", onDragStart);
 	document.removeEventListener("dragover", onDragOver);
@@ -194,7 +194,7 @@ async function onClick(event) {
 	}
 }
 
-function onKeyPress(event) {
+function onKeyDown(event) {
 	// ポップアップ上でEscキー押下
 	if (!gPopup.hidden && event.key == "Escape") {
 		hidePopup();

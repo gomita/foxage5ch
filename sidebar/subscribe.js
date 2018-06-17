@@ -27,7 +27,7 @@ function uninit() {
 }
 
 function onKeyPress(event) {
-	if (event.keyCode == (event.DOM_VK_RETURN || 13))
+	if (event.key == "Enter")
 		addURL();
 }
 

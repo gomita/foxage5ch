@@ -44,8 +44,9 @@ function fitToContent() {
 
 function captureKeyEvents() {
 	document.addEventListener("keypress", event => {
-		if (event.keyCode == (event.DOM_VK_ESCAPE || 27))
+		if (event.key == "Escape") {
 			window.top.hideLayer();
+		}
 	});
 }
 

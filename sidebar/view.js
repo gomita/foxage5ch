@@ -196,7 +196,7 @@ async function onClick(event) {
 
 function onKeyPress(event) {
 	// ポップアップ上でEscキー押下
-	if (!gPopup.hidden && event.keyCode == (event.DOM_VK_ESCAPE || 27)) {
+	if (!gPopup.hidden && event.key == "Escape") {
 		hidePopup();
 		return;
 	}
@@ -204,12 +204,12 @@ function onKeyPress(event) {
 	if (event.target.id == "searchbar") {
 		clearTimeout(gSearchTimer);
 		// Escキー押下で検索終了
-		if (event.keyCode == (event.DOM_VK_ESCAPE || 27)) {
+		if (event.key == "Escape") {
 			event.target.value = "";
 			rebuildTree();
 		}
 		// Enterキー押下で再検索
-		else if (event.keyCode == (event.DOM_VK_RETURN || 13)) {
+		else if (event.key == "Enter") {
 			rebuildTree();
 		}
 		return;
@@ -222,12 +222,12 @@ function onKeyPress(event) {
 	if (!elt) return;
 	var item = FoxAgeSvc.getItem(elt.id);
 	if (!item) return;
-	switch (event.keyCode) {
-		case (event.DOM_VK_RETURN ||  13): doCommand("open", item, event.ctrlKey || event.shiftKey ? 1:0); break;
-		case (event.DOM_VK_F2     || 113): doCommand("showInfo", item); break;
-		case (event.DOM_VK_DELETE ||  46): doCommand("delete", item); break;
-		case (event.DOM_VK_UP     ||  38): setTreeSelection(elt.previousSibling, true); break;
-		case (event.DOM_VK_DOWN   ||  40): setTreeSelection(elt.nextSibling, true); break;
+	switch (event.key) {
+		case "Enter"    : doCommand("open", item, event.ctrlKey || event.shiftKey ? 1:0); break;
+		case "F2"       : doCommand("showInfo", item); break;
+		case "Delete"   : doCommand("delete", item); break;
+		case "ArrowUp"  : setTreeSelection(elt.previousSibling, true); break;
+		case "ArrowDown": setTreeSelection(elt.nextSibling, true); break;
 		default: 
 	}
 }

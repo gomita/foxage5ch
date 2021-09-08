@@ -98,8 +98,8 @@ var FoxAgeUtils = {
 			url = this._parseToBoardURL(aItem);
 		else if (aItem.type == this.TYPE_THREAD)
 			url = this._parseToThreadURL(aItem);
-		// HTTPSオプションが有効なら5ch.netに限りプロトコルを変更
-		if (aHttps && url.indexOf(".5ch.net/") >= 0)
+		// HTTPSオプションが有効なら5ch.netとmachi.toに限りプロトコルを変更
+		if (aHttps && (url.includes(".5ch.net/") || url.includes("machi.to/")))
 			url = url.replace("http://", "https://");
 		return url;
 	},

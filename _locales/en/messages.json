@@ -69,7 +69,7 @@
 	"clickBehavior_2": { "message": "Switch to the tab immediately" },
 	"upwardMargin": { "message": "Number of posts to show upwardly:" },
 	"openInterval": { "message": "Interval to open threads (sec):" },
-	"https": { "message": "HTTPS connections (*.5ch.net)" },
+	"https": { "message": "HTTPS connections (*.5ch.net, machi.to)" },
 	"dataManage": { "message": "Data Management" },
 	"backup": { "message": "Backup" },
 	"restore": { "message": "Restore" },

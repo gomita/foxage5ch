@@ -774,6 +774,9 @@ var FoxAgeSvc = {
 			return;
 		}
 		var url = FoxAgeUtils.parseToURL(aItem, this.getPref("https"));
+		// まちBBSのタイトル取得時は強制的にHTTPS接続
+		if (url.includes("machi.to/"))
+			url = url.replace("http://", "https://");
 		// スレの場合はレス1のみ取得すれば十分
 		if (aItem.type == FoxAgeUtils.TYPE_THREAD)
 			url += "1";

@@ -496,7 +496,7 @@ function elementForItem(item) {
 	// BBS
 	if (item.type == FoxAgeUtils.TYPE_BOARD) {
 		switch (item.bbs) {
-//			case FoxAgeUtils.BBS_5CH  : elt.classList.add("bbs5ch"); break;
+			case FoxAgeUtils.BBS_5CH  : elt.classList.add("bbs5ch"); break;
 			case FoxAgeUtils.BBS_PINK : elt.classList.add("pink"); break;
 			case FoxAgeUtils.BBS_MACHI: elt.classList.add("machi"); break;
 			case FoxAgeUtils.BBS_JBBS : elt.classList.add("jbbs"); break;

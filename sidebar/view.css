@@ -163,7 +163,7 @@ li[type="board"] {
 }
 
 li[type="board"].bbs5ch {
-	background-image: url("http://5ch.net/favicon.ico");
+	background-image: url("https://5ch.net/favicon.ico");
 }
 
 li[type="board"].pink {
@@ -179,7 +179,7 @@ li[type="board"].jbbs {
 }
 
 li[type="board"].unknown {
-	background-image: url('chrome://browser/skin/places/folder.svg');
+	background-image: url('/icons/folder.svg');
 }
 
 :root[browser="Chrome"] li[type="board"].unknown {

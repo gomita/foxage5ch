@@ -119,7 +119,7 @@ var FoxAgeUtils = {
 		var url = "http://";
 		if (host == "jbbs.shitaraba.net")
 			url += host + "/bbs/read.cgi/" + path + "/" + bbs + "/" + key + "/";
-		else if (host.endsWith(".machi.to"))
+		else if (host.endsWith("machi.to"))
 			url += host + "/bbs/read.cgi/" + bbs + "/" + key + "/";
 		else
 			url += host + (path ? "/" + path : "") + "/test/read.cgi/" + bbs + "/" + key + "/";
@@ -141,7 +141,7 @@ var FoxAgeUtils = {
 			bbs = this.BBS_5CH;
 		else if (aItemId.indexOf(".bbspink.com") >= 0)
 			bbs = this.BBS_PINK;
-		else if (aItemId.indexOf(".machi.to") >= 0)
+		else if (aItemId.indexOf("machi.to") >= 0)
 			bbs = this.BBS_MACHI;
 		else if (aItemId.indexOf("jbbs.shitaraba.net") >= 0)
 			bbs = this.BBS_JBBS;
@@ -197,6 +197,7 @@ var FoxAgeUtils = {
 	sanitizeTitle: function(aTitle) {
 		aTitle = aTitle.replace(" - 5ちゃんねる掲示板", "");
 		aTitle = aTitle.replace(/ - \d{10} - したらば掲示板/, "");
+		aTitle = aTitle.replace(/^まちBBS/, "");
 		aTitle = aTitle.replace("[転載禁止]", "", "g");
 		aTitle = aTitle.replace("[無断転載禁止]", "", "g");
 		aTitle = aTitle.replace("©2ch.net", "", "g");	// ©2ch.net

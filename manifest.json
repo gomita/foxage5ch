@@ -53,6 +53,7 @@
 		"downloads",
 		"*://*.2ch.net/*",
 		"*://*.5ch.net/*",
+		"*://machi.to/*",
 		"*://*.machi.to/*",
 		"*://*.bbspink.com/*",
 		"*://*.open2ch.net/*",

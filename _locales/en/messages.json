@@ -75,6 +75,7 @@
 	"restore": { "message": "Restore" },
 	"restore_confirm": { "message": "Restore OK?" },
 	"restore_workaround": { "message": "Due to some reasons, please restore on the normal Options page." },
+	"auto_backup": { "message": "Auto-backup (everyday)" },
 	"links": { "message": "Links" },
 	"homepage": { "message": "Homepage" },
 	"5chBBS": { "message": "5ch BBS" }

@@ -19,6 +19,7 @@ async function init() {
 	document.getElementById("https").onchange = onHttpsChange;
 	document.getElementById("backupButton").onclick = onBackupButton;
 	document.getElementById("restoreButton").onchange = onRestoreButton;
+	document.getElementById("autoBackup").onchange = onAutoBackupChange;
 	document.getElementById("links").onclick = onLinksClick;
 	// 初期選択
 	var browserAction = FoxAgeSvc.getPref("browserAction");
@@ -39,6 +40,8 @@ async function init() {
 	document.getElementById("https").checked = https;
 	var maxRequests = FoxAgeSvc.getPref("maxRequests");
 	document.getElementById("maxRequests").selectedIndex = maxRequests - 1;
+	var autoBackup = FoxAgeSvc.getPref("autoBackup");
+	document.getElementById("autoBackup").checked = autoBackup >= 1;
 	// HTMLのタイトル
 	document.title += " - " + browser.i18n.getMessage("options");
 	// iframe内での読み込み時
@@ -129,6 +132,13 @@ function onRestoreButton(event) {
 		}
 	};
 	reader.readAsText(file);
+}
+
+function onAutoBackupChange(event) {
+	FoxAgeSvc.setPref("autoBackup", event.target.checked ? 1 : 0);
+	// チェックオン時、自動バックアップ即実行
+	if (event.target.checked)
+		FoxAgeSvc.backupData(true);
 }
 
 function onLinksClick(event) {

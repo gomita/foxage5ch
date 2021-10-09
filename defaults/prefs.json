@@ -6,5 +6,7 @@
 	"upwardMargin": 2,
 	"openInterval": 3,
 	"https": false,
+	"autoBackup": 0,
+	"autoBackupDate": 0,
 	"lastSubPane": ""
 }

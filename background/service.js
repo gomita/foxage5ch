@@ -123,10 +123,18 @@ var FoxAgeSvc = {
 		data[DATA_KEY_ITEMS] = this._allItems;
 		return browser.storage.local.set(data).then(() => {
 			LOG("flush data");	// #debug
+			// 自動バックアップ
+			if (this.getPref("autoBackup") > 0)
+				this.backupData(true);
 		});
 	},
 
-	backupData: async function() {
+	backupData: async function(aAuto) {
+		if (aAuto) {
+			// 前回バックアップ日の00:00:00から24時間未満なら自動バックアップしない
+			if (Date.now() - this.getPref("autoBackupDate") < 1000 * 60 * 60 * 24)
+				return;
+		}
 		let data = {};
 		data[DATA_KEY_PREFS] = this._userPrefs;
 		data[DATA_KEY_ITEMS] = this._allItems;
@@ -139,13 +147,23 @@ var FoxAgeSvc = {
 			dt.getDate().toString().padStart(2, "0")
 		].join("-");
 		let filename = `foxage5ch-${ymd}.json`;
-		let id = await browser.downloads.download({ url, filename, saveAs: true });
+		if (aAuto)
+			filename = "foxage5ch-backups/" + filename;
+		let conflictAction = aAuto ? "overwrite" : "uniquify";
+		let id = await browser.downloads.download({ url, filename, saveAs: !aAuto, conflictAction });
 		browser.downloads.onChanged.addListener(function clear(delta) {
 			if (delta.id == id && delta.state.current == "complete") {
 				URL.revokeObjectURL(url);
 				browser.downloads.onChanged.removeListener(clear);
 			}
 		});
+		// 自動バックアップ
+		if (aAuto) {
+			LOG("auto-backup: " + filename);	// #debug
+			// browser.downloads.erase({ id });
+			// 今回バックアップ日の00:00:00を設定に保存
+			this.setPref("autoBackupDate", new Date(ymd.replace(/-/g, "/")).getTime());
+		}
 	},
 
 	restoreData: async function(aData) {

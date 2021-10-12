@@ -33,6 +33,10 @@
 	white-space: nowrap;
 }
 
+.hbox label + input[type="radio"] {
+	margin-left: 4px;
+}
+
 #buttons {
 	justify-content: center;
 	margin-top: 30px;
@@ -56,6 +60,12 @@ h2:after {
 
 :root[theme="dark"] h2:after {
 	filter: invert(1);
+}
+
+input[type="text"],
+input[type="number"],
+input[type="search"] {
+	padding: 3px;
 }
 
 input[type="radio"], input[type="checkbox"] {

@@ -76,7 +76,7 @@ img {
 
 #searchbar {
 	margin: 2px 4px 4px 4px;
-	padding: 2px;
+	padding: 4px;
 	border: 1px solid Highlight;
 	width: calc(100vw - 10px);
 }

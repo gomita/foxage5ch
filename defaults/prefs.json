@@ -1,5 +1,6 @@
 {
 	"browserAction": 0,
+	"theme": "light",
 	"treeMode": 0,
 	"maxRequests": 2,
 	"clickBehavior": 0,

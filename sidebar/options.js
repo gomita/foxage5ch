@@ -9,6 +9,8 @@ async function init() {
 	document.getElementById("browserAction_0").onchange = onBrowserActionChange;
 	document.getElementById("browserAction_1").onchange = onBrowserActionChange;
 	document.getElementById("browserAction_2").onchange = onBrowserActionChange;
+	document.getElementById("theme_light").onchange = onThemeChange;
+	document.getElementById("theme_dark").onchange = onThemeChange;
 	document.getElementById("treeMode_0").onchange = onTreeModeChange;
 	document.getElementById("treeMode_1").onchange = onTreeModeChange;
 	document.getElementById("maxRequests").onchange = onMaxRequestsChange;
@@ -27,6 +29,8 @@ async function init() {
 	if (!FoxAgeUtils.isFirefox && browserAction == 0)
 		browserAction = 2;
 	document.getElementById("browserAction_" + browserAction).checked = true;
+	var theme = FoxAgeSvc.getPref("theme");
+	document.getElementById("theme_" + theme).checked = true;
 	var treeMode = FoxAgeSvc.getPref("treeMode");
 	document.getElementById("treeMode_" + treeMode).checked = true;
 	var clickBehavior = FoxAgeSvc.getPref("clickBehavior");
@@ -73,6 +77,11 @@ function uninit() {
 function onBrowserActionChange(event) {
 	FoxAgeSvc.setPref("browserAction", parseInt(event.target.value, 10));
 	FoxAgeSvc.setPopupURL();
+}
+
+function onThemeChange(event) {
+	FoxAgeSvc.setPref("theme", event.target.value);
+	FoxAgeSvc._notify("reload-data");
 }
 
 function onTreeModeChange(event) {

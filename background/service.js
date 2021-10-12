@@ -78,7 +78,7 @@ var FoxAgeSvc = {
 	_readData: async function() {
 		if (!this._defaultPrefs) {
 			// デフォルト設定値読み込み
-			let response = await fetch(browser.extension.getURL("/defaults/prefs.json"));
+			let response = await fetch(browser.runtime.getURL("/defaults/prefs.json"));
 			let text = await response.text();
 			this._defaultPrefs = JSON.parse(text);
 		}
@@ -95,7 +95,7 @@ var FoxAgeSvc = {
 			}
 			else {
 				// 初期データ読み込み
-				let response = await fetch(browser.extension.getURL("/defaults/items.json"));
+				let response = await fetch(browser.runtime.getURL("/defaults/items.json"));
 				let text = await response.text();
 				this._allItems = JSON.parse(text);
 				this._updateIndexForItemId();

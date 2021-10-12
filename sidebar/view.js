@@ -661,7 +661,7 @@ function setTreeSelection(aArgument, aAutoScroll) {
 function showLayer(aURL) {
 	var layer = document.getElementById("layer");
 	layer.hidden = false;
-	layer.firstChild.src = browser.extension.getURL(aURL);
+	layer.firstChild.src = browser.runtime.getURL(aURL);
 }
 
 function hideLayer() {

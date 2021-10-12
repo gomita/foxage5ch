@@ -54,6 +54,10 @@ h2:after {
 	background-position: center;
 }
 
+:root[theme="dark"] h2:after {
+	filter: invert(1);
+}
+
 input[type="radio"], input[type="checkbox"] {
 	/* unset margin in browser css */
 	margin: 0px;
@@ -88,9 +92,42 @@ input[type="radio"], input[type="checkbox"] {
 	background-color: ButtonHighlight;
 }
 
+:root[theme="dark"] input[type="text"],
+:root[theme="dark"] input[type="search"],
+:root[theme="dark"] input[type="number"],
+:root[theme="dark"] input[type="button"],
+:root[theme="dark"] .button {
+	border: 1px solid var(--separator-color);
+}
+
+:root[theme="dark"] input[type="button"]:hover,
+:root[theme="dark"] .button:hover {
+	background-color: var(--hover-color);
+}
+
+:root[theme="dark"] input[type="button"]:active,
+:root[theme="dark"] .button:active {
+	background-color: rgb(60,60,60);
+}
+
+:root[theme="dark"] .button[disabled]:hover,
+:root[theme="dark"] .button[disabled]:active,
+:root[theme="dark"] input[type="button"][disabled]:hover,
+:root[theme="dark"] input[type="button"][disabled]:active {
+	background-color: transparent;
+}
+
+:root[theme="dark"] input[readonly] {
+	color: #c9c9ca;
+}
+
 .link {
 	color: -moz-hyperlinktext;
 	cursor: pointer;
+}
+
+:root[theme="dark"] .link {
+	color: skyblue;
 }
 
 :root[browser="Chrome"] .link {

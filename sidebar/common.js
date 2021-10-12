@@ -8,6 +8,7 @@ function getService() {
 		return browser.runtime.getBackgroundPage(win => {
 			window.FoxAgeSvc = win.FoxAgeSvc;
 			window.FoxAgeUtils = win.FoxAgeUtils;
+			document.documentElement.setAttribute("theme", win.FoxAgeSvc.getPref("theme"));
 		});
 	}
 	else {
@@ -16,6 +17,7 @@ function getService() {
 		window.FoxAgeSvc = win.FoxAgeSvc;
 		window.FoxAgeUtils = win.FoxAgeUtils;
 		document.documentElement.setAttribute("browser", "Chrome");
+		document.documentElement.setAttribute("theme", win.FoxAgeSvc.getPref("theme"));
 	}
 }
 

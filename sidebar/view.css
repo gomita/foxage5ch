@@ -113,6 +113,15 @@ ul {
 	height: 14px;
 }
 
+:root[theme="dark"] #subTitle {
+	border-color: var(--separator-color);
+	background-color: rgb(51,51,56)
+}
+
+:root[theme="dark"] #subTitleText {
+	color: var(--text-color);
+}
+
 /* ::::: 板・スレ・区切り共通 ::::: */
 
 li {
@@ -151,6 +160,16 @@ li.exclude  { color: deeppink; }
 	width: 50px;
 	height: 2px;
 	background-color: #222;
+}
+
+:root[theme="dark"] li:hover,
+:root[theme="dark"] li.selected {
+	background-color: #373954;
+	border-color: transparent;
+}
+
+:root[theme="dark"] #dropline {
+	background-color: #DDD;
 }
 
 /* ::::: 板 ::::: */
@@ -212,6 +231,10 @@ li[type="separator"].notitle:after {
 	margin-left: -1em;
 }
 
+:root[theme="dark"] li[type="separator"]:after {
+	filter: invert(1);
+}
+
 /* ::::: スレ ::::: */
 
 li[type="thread"] {
@@ -253,6 +276,10 @@ li[type="thread"].datout {
 	height: 100vh;
 	background-color: rgba(0,0,0,0.5);
 	transition-property: background;
+}
+
+:root[theme="dark"] #layer {
+	background-color: rgba(0,0,0,0.8);
 }
 
 #layer > iframe {
@@ -332,5 +359,27 @@ li[type="thread"].datout {
 	#popup_fetchTitle, #popup_findThread, 
 	#popup_transfer, #popup_findNext, #popup_sep4) {
 	display: none;
+}
+
+:root[theme="dark"] #popup {
+	border-color: var(--separator-color);
+	background-color: rgb(43,42,51);
+}
+
+:root[theme="dark"] #popup div {
+	color: var(--text-color);
+}
+
+:root[theme="dark"] #popup hr {
+	border-top: 1px solid var(--separator-color);
+	border-bottom: 0;
+}
+
+:root[theme="dark"] #popup div:hover {
+	background-color: var(--hover-color);
+}
+
+:root[theme="dark"] #popup div[disabled]:hover {
+	background-color: transparent;
 }
 

@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "FoxAge5ch",
-	"version": "5.1.4",
+	"version": "5.2",
 	"description": "__MSG_extensionDescription__",
 	"icons": {
 		"16": "icons/icon-16.png",

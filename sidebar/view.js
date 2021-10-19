@@ -676,8 +676,8 @@ function hideLayer() {
 function showPopup(event) {
 	if (!gPopup.hidden)
 		hidePopup();
-	var bodyWidth  = document.body.clientWidth;
-	var bodyHeight = document.body.clientHeight;
+	var bodyWidth  = document.querySelector("#container").clientWidth;
+	var bodyHeight = document.querySelector("#container").clientHeight;
 	// ポップアップを表示
 	var nodeId = event.target.id.startsWith("subTitle")
 	           ? gSubTree.getAttribute("itemId") : event.target.id;

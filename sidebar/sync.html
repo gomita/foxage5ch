@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>FoxAge5ch</title>
+	<link rel="stylesheet" href="common.css" />
+	<link rel="stylesheet" href="options.css" />
+</head>
+<body preload="true">
+<div id="toolbar">
+	<button id="backButton" i18n="title:back">
+		<img src="/icons/overflow-16.svg" />
+		<label for="backButton" i18n="text:back"></label>
+	</button>
+</div>
+<div id="content">
+	<h2 i18n="text:sync"></h2>
+	<div class="hbox">
+		<label for="device" i18n="text:device"></label>
+ 		<input id="device" type="text" maxlength="16" size="16" pattern="\w{1,16}" i18n="placeholder:device_placeholder">
+	</div>
+	<div id="entriesOuter" style="margin: 12px auto;"></div>
+	<div class="hbox">
+		<input id="downloadButton" type="button" i18n="value:download">
+		<input id="resetButton" type="button" i18n="value:reset">
+	</div>
+	<div class="hbox">
+		<label i18n="text:size"></label>
+		<progress id="syncSize" value="0" max="1"></progress>
+	</div>
+</div>
+<template id="entriesTemplate">
+	<div class="hbox" style="margin: 6px;">
+		<input type="radio" name="entries"><label></label>
+	</div>
+</template>
+<script src="/lib/browser-polyfill.js"></script>
+<script src="common.js"></script>
+<script src="sync.js"></script>
+</body>
+</html>

@@ -44,6 +44,12 @@ async function init() {
 		onMessage({ topic: "open-start" });
 	if (window.location.hash == "#popup")
 		document.documentElement.setAttribute("popup", "true");
+	// 同期更新あり
+	if (FoxAgeSvc.getPref("sync") && FoxAgeSvc.getPref("syncNotify")) {
+		setTimeout(() => {
+			onMessage({ topic: "sync-notify", value: JSON.parse(FoxAgeSvc.getPref("syncNotify")) });
+		}, 200);
+	}
 }
 
 function uninit() {
@@ -404,6 +410,21 @@ function onMessage(request, sender, sendResponse) {
 		// 更新されたスレッドを開く終了
 		case "open-stop": 
 			document.getElementById("openUpdatesButton").removeAttribute("checked");
+			break;
+		// 同期アップロード: 何もしない
+		case "sync-upload": 
+			break;
+		// 同期更新あり: ポップアップ表示
+		case "sync-notify": 
+			FoxAgeSvc.setPref("syncNotify", "");
+			var msg = browser.i18n.getMessage("sync_notify") + "\n" + 
+			          request.value.device + ": " + new Date(request.value.time).toLocaleString();
+			if (window.confirm(msg))
+				showLayer("sidebar/sync.html#" + request.value.device);
+			break;
+		// 同期失敗: メッセージ表示
+		case "sync-error": 
+			onMessage({ topic: "show-message", value: browser.i18n.getMessage("sync_error") });
 			break;
 		default: 
 			console.error("unknown topic: " + request.topic);	// #debug

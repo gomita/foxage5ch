@@ -9,5 +9,6 @@
 	"https": false,
 	"autoBackup": 0,
 	"autoBackupDate": 0,
+	"sync": false,
 	"lastSubPane": ""
 }

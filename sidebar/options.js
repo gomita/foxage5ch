@@ -22,6 +22,8 @@ async function init() {
 	document.getElementById("backupButton").onclick = onBackupButton;
 	document.getElementById("restoreButton").onchange = onRestoreButton;
 	document.getElementById("autoBackup").onchange = onAutoBackupChange;
+	document.getElementById("syncEnabled").onchange = onSyncEnabledChange;
+	document.getElementById("syncButton").onclick = onSyncButton;
 	document.getElementById("links").onclick = onLinksClick;
 	// 初期選択
 	var browserAction = FoxAgeSvc.getPref("browserAction");
@@ -46,6 +48,9 @@ async function init() {
 	document.getElementById("maxRequests").selectedIndex = maxRequests - 1;
 	var autoBackup = FoxAgeSvc.getPref("autoBackup");
 	document.getElementById("autoBackup").checked = autoBackup >= 1;
+	var sync = FoxAgeSvc.getPref("sync");
+	document.getElementById("syncEnabled").checked = sync;
+	document.getElementById("syncButton").disabled = !sync;
 	// HTMLのタイトル
 	document.title += " - " + browser.i18n.getMessage("options");
 	// iframe内での読み込み時
@@ -148,6 +153,20 @@ function onAutoBackupChange(event) {
 	// チェックオン時、自動バックアップ即実行
 	if (event.target.checked)
 		FoxAgeSvc.backupData(true);
+}
+
+function onSyncEnabledChange(event) {
+	FoxAgeSvc.setPref("sync", event.target.checked);
+	document.querySelector("#syncButton").disabled = !event.target.checked;
+}
+
+function onSyncButton(event) {
+	if (window.top.showLayer)
+		// サイドバー内
+		window.top.showLayer("sidebar/sync.html");
+	else
+		// about:addons内
+		window.location.href = browser.extension.getURL("sidebar/sync.html");
 }
 
 function onLinksClick(event) {

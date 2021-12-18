@@ -80,7 +80,18 @@
 	"restore_confirm": { "message": "Restore OK?" },
 	"restore_workaround": { "message": "Due to some reasons, please restore on the normal Options page." },
 	"auto_backup": { "message": "Auto-backup (everyday)" },
+	"sync_enabled": { "message": "Enabled syncing" },
+	"sync_options": { "message": "Settings..." },
 	"links": { "message": "Links" },
 	"homepage": { "message": "Homepage" },
+	// sync
+	"sync": { "message": "Sync" },
+	"device": { "message": "Device Name:" },
+	"device_placeholder": { "message": "1 - 16 alphanumeric letters" },
+	"download": { "message": "Download" },
+	"reset": { "message": "Reset" },
+	"size": { "message": "Size: " },
+	"sync_notify": { "message": "An uploaded from another device is available." },
+	"sync_error": { "message": "Failed to sync data." },
 	"5chBBS": { "message": "5ch BBS" }
 }

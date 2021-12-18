@@ -29,11 +29,9 @@ var FoxAgeSvc = {
 		this._notify("rebuild-tree");
 		this.setPopupURL();
 		browser.browserAction.onClicked.addListener(this._handleBrowserAction);
+		browser.storage.onChanged.addListener(this._handleStorageChanged);
 		if (!FoxAgeUtils.isFirefox)
 			chrome.runtime.onSuspend.addListener(this._destroy);
-//		browser.storage.onChanged.addListener(function(changes, area) {
-//			LOG("storage." + area + " changed: \n" + changes.toSource());
-//		});
 	},
 
 	_destroy: function() {
@@ -42,6 +40,7 @@ var FoxAgeSvc = {
 		this.cancelOpenUpdates();
 		if (!FoxAgeUtils.isFirefox)
 			chrome.runtime.onSuspend.removeListener(this._destroy);
+		browser.storage.onChanged.removeListener(this._handleStorageChanged);
 		browser.browserAction.onClicked.removeListener(this._handleBrowserAction);
 		if (this._flushTimer) {
 			this._flushData();
@@ -126,8 +125,17 @@ var FoxAgeSvc = {
 			// 自動バックアップ
 			if (this.getPref("autoBackup") > 0)
 				this.backupData(true);
+			// 同期（自動アップロード）
+			if (this._needToSync && this.getPref("sync")) {
+				this._needToSync = false;
+				this.syncUpload();
+			}
 		});
 	},
+
+	// flushData後にsyncUploadすべきかどうかの判定フラグ
+	// trueになる契機はinsertItem, moveItem, removeItem, changeItemProperty実行時
+	_needToSync: false,
 
 	backupData: async function(aAuto) {
 		if (aAuto) {
@@ -203,6 +211,46 @@ var FoxAgeSvc = {
 		this._notify("reload-data");
 	},
 
+	syncUpload: async function() {
+		let device = this.getPref("syncDevice");
+		if (!device)
+			return;
+		let data = {};
+		// [device]にアップロード日時とアイテム数を格納
+		data[device] = { time: Date.now(), count: this._allItems.length };
+		// [device:0]～[device:512]にデータを格納
+		// storage.syncにObject 1キーあたり8KB制限があるので、配列っぽくばらす
+		for (let i = 0; i < this._allItems.length; i++) {
+			data[device + ":" + i] = this._allItems[i];
+		}
+		// syncストレージの[device:0]～[device:512]を消去してから再度セット
+		await browser.storage.sync.remove([...Array(512)].map((_, i) => device + ":" + i));
+		browser.storage.sync.set(data).then(async () => {
+			LOG("sync upload");
+			this._notify("sync-upload");
+		}, (reason) => {
+			this._notify("sync-error", reason.toString());
+		});
+	},
+
+	syncDownload: async function(aDevice) {
+		browser.storage.sync.get().then(async data => {
+			LOG("sync download");
+			let items = [];
+			for (let i = 0; i < data[aDevice].count; i++) {
+				items.push(data[aDevice + ":" + i]);
+			}
+			if (items.length < 1)
+				return;
+			this._allItems = items;
+			await this._flushData();
+			await this._readData();
+			this._notify("reload-data");
+		}, () => {
+			this._notify("sync-error", reason.toString());
+		});
+	},
+
 	////////////////////////////////////////////////////////////////////////////////
 	// データ操作
 
@@ -260,6 +308,7 @@ var FoxAgeSvc = {
 		if (updatedThread)
 			this._updateBoardStats(this.getItem(aNewItem.parent));
 		this._flushDataWithDelay();
+		this._needToSync = true;
 		return this._notify("rebuild-tree");
 	},
 
@@ -279,6 +328,7 @@ var FoxAgeSvc = {
 		this._allItems.splice(targetIndex, 0, removedItems[0]);
 		this._updateIndexForItemId();
 		this._flushDataWithDelay();
+		this._needToSync = true;
 		return this._notify("rebuild-tree");
 	},
 
@@ -304,6 +354,7 @@ var FoxAgeSvc = {
 			// 板を削除した場合、ルートのdat落ちスレッド数を更新する
 			this._updateRootStats();
 		this._flushDataWithDelay();
+		this._needToSync = true;
 		this._notify("show-message", browser.i18n.getMessage("delete_result", [removedCount]));
 		return this._notify("rebuild-tree");
 	},
@@ -403,6 +454,7 @@ var FoxAgeSvc = {
 		else
 			aItem[aProperty] = aValue;
 		this._flushDataWithDelay();
+		this._needToSync = true;
 	},
 
 	_addStatusFlag: function(aItem, aFlag) {
@@ -957,6 +1009,22 @@ var FoxAgeSvc = {
 			else
 				browser.tabs.create({ url: url + "#tab", active });
 		}
+	},
+
+	_handleStorageChanged: function(changes, area) {
+		if (!FoxAgeSvc.getPref("sync"))
+			return;
+		if (area != "sync")
+			return;
+		// 自デバイス以外のデバイスに変化があるか
+		var thisDevice = FoxAgeSvc.getPref("syncDevice");
+		var devices = Object.keys(changes).filter(key => !key.includes(":") && key != thisDevice);
+		if (devices.length == 0)
+			return;
+		var value = { device: devices[0], time: changes[devices[0]].newValue.time };
+		FoxAgeSvc.setPref("syncNotify", JSON.stringify(value));
+		FoxAgeSvc._notify("sync-notify", value);
+		LOG("storage changed: " + JSON.stringify(value));
 	},
 
 	// メッセージ送信→応答→Promiseを返す

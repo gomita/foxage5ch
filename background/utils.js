@@ -40,6 +40,8 @@ var FoxAgeUtils = {
 		if (!/^https?:\/\//.test(aURL))
 			throw new Error("invalid URL");
 		aURL = RegExp.rightContext;
+		// クラシック版のURLに対応
+		aURL = aURL.replace("/read.cgi/c/", "/read.cgi/");
 		if (/\/test\/read\.(?:cgi|so|html)\/(\w+)\/(\d+)/.test(aURL))
 			// 5ちゃんねるスレッド
 			// https://egg.5ch.net/test/read.cgi/software/1234567890/l50

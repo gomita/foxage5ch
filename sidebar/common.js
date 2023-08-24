@@ -5,7 +5,7 @@ function getService() {
 	if ("sidebarAction" in browser) {
 		document.documentElement.setAttribute("browser", "Firefox");
 		// [Firefox]
-		return browser.runtime.getBackgroundPage(win => {
+		return browser.runtime.getBackgroundPage().then(win => {
 			window.FoxAgeSvc = win.FoxAgeSvc;
 			window.FoxAgeUtils = win.FoxAgeUtils;
 			document.documentElement.setAttribute("theme", win.FoxAgeSvc.getPref("theme"));

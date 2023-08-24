@@ -361,7 +361,7 @@ var FoxAgeSvc = {
 
 	// 指定したアイテム (板またはスレッド) をブラウザで開く
 	openItem: async function(aItem, aInNewTab, aActive = true) {
-		var url = FoxAgeUtils.parseToURL(aItem, this.getPref("https"));
+		var url = FoxAgeUtils.parseToURL(aItem, this.getPref("https"), this.getPref("classic"));
 		// タブ再利用マッチング用
 		var urlPattern = url;
 		if (aItem.type == FoxAgeUtils.TYPE_THREAD) {

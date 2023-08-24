@@ -7,6 +7,7 @@
 	"upwardMargin": 2,
 	"openInterval": 3,
 	"https": false,
+	"classic": false,
 	"autoBackup": 0,
 	"autoBackupDate": 0,
 	"sync": false,

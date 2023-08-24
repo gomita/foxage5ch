@@ -94,7 +94,7 @@ var FoxAgeUtils = {
 	},
 
 	// 板またはスレッドのアイテムIDをパースしてURLへ変換する
-	parseToURL: function(aItem, aHttps) {
+	parseToURL: function(aItem, aHttps, aClassic) {
 		var url = "";
 		if (aItem.type == this.TYPE_BOARD)
 			url = this._parseToBoardURL(aItem);
@@ -103,6 +103,9 @@ var FoxAgeUtils = {
 		// HTTPSオプションが有効なら5ch.netとmachi.toに限りプロトコルを変更
 		if (aHttps && (url.includes(".5ch.net/") || url.includes("machi.to/")))
 			url = url.replace("http://", "https://");
+		// クラシック版オプションが有効なら5ch.netに限りURLを変更
+		if (aClassic && url.includes(".5ch.net/"))
+			url = url.replace("/read.cgi/", "/read.cgi/c/");
 		return url;
 	},
 

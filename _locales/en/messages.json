@@ -74,6 +74,7 @@
 	"upwardMargin": { "message": "Number of posts to show upwardly:" },
 	"openInterval": { "message": "Interval to open threads (sec):" },
 	"https": { "message": "HTTPS connections (*.5ch.net, machi.to)" },
+	"classic": { "message": "Classic UI (*.5ch.net)" },
 	"dataManage": { "message": "Data Management" },
 	"backup": { "message": "Backup" },
 	"restore": { "message": "Restore" },

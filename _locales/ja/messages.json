@@ -74,6 +74,7 @@
 	"upwardMargin": { "message": "レスさかのぼり表示数:" },
 	"openInterval": { "message": "連続でスレを開く間隔(秒):" },
 	"https": { "message": "HTTPS 接続 (*.5ch.net, machi.to)" },
+	"classic": { "message": "クラシック版 (*.5ch.net)" },
 	"dataManage": { "message": "データ管理" },
 	"backup": { "message": "バックアップ" },
 	"restore": { "message": "復元" },

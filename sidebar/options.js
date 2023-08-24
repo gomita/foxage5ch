@@ -19,6 +19,7 @@ async function init() {
 	document.getElementById("clickBehavior_1").onchange = onClickBehaviorChange;
 	document.getElementById("clickBehavior_2").onchange = onClickBehaviorChange;;
 	document.getElementById("https").onchange = onHttpsChange;
+	document.getElementById("classic").onchange = onClassicChange;
 	document.getElementById("backupButton").onclick = onBackupButton;
 	document.getElementById("restoreButton").onchange = onRestoreButton;
 	document.getElementById("autoBackup").onchange = onAutoBackupChange;
@@ -44,6 +45,8 @@ async function init() {
 	document.getElementById("openInterval").value = openInterval;
 	var https = FoxAgeSvc.getPref("https");
 	document.getElementById("https").checked = https;
+	var classic = FoxAgeSvc.getPref("classic");
+	document.getElementById("classic").checked = classic;
 	var maxRequests = FoxAgeSvc.getPref("maxRequests");
 	document.getElementById("maxRequests").selectedIndex = maxRequests - 1;
 	var autoBackup = FoxAgeSvc.getPref("autoBackup");
@@ -125,6 +128,10 @@ function onOpenIntervalChange(event) {
 
 function onHttpsChange(event) {
 	FoxAgeSvc.setPref("https", event.target.checked);
+}
+
+function onClassicChange(event) {
+	FoxAgeSvc.setPref("classic", event.target.checked);
 }
 
 function onBackupButton(event) {

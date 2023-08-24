@@ -1,7 +1,7 @@
 /* ::::: コンテナ ::::: */
 
 :root[popup] body {
-	width: 16em;
+	width: 25em;
 	height: 50em;
 	overflow: hidden;
 }

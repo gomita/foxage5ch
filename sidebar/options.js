@@ -17,7 +17,8 @@ async function init() {
 	document.getElementById("upwardMargin").onchange = onUpwardMarginChange;
 	document.getElementById("openInterval").onchange = onOpenIntervalChange;
 	document.getElementById("clickBehavior_1").onchange = onClickBehaviorChange;
-	document.getElementById("clickBehavior_2").onchange = onClickBehaviorChange;;
+	document.getElementById("clickBehavior_2").onchange = onClickBehaviorChange;
+	document.getElementById("reuseTabs").onchange = onReuseTabsChange;
 	document.getElementById("https").onchange = onHttpsChange;
 	document.getElementById("classic").onchange = onClassicChange;
 	document.getElementById("backupButton").onclick = onBackupButton;
@@ -39,6 +40,8 @@ async function init() {
 	var clickBehavior = FoxAgeSvc.getPref("clickBehavior");
 	document.getElementById("clickBehavior_1").checked = clickBehavior >= 1;
 	document.getElementById("clickBehavior_2").checked = clickBehavior == 2;
+	var reuseTabs = FoxAgeSvc.getPref("reuseTabs");
+	document.getElementById("reuseTabs").checked = reuseTabs;
 	var upwardMargin = FoxAgeSvc.getPref("upwardMargin");
 	document.getElementById("upwardMargin").value = upwardMargin;
 	var openInterval = FoxAgeSvc.getPref("openInterval");
@@ -116,6 +119,10 @@ function onClickBehaviorChange(event) {
 			clickBehavior = 2;
 	}
 	FoxAgeSvc.setPref("clickBehavior", clickBehavior);
+}
+
+function onReuseTabsChange(event) {
+	FoxAgeSvc.setPref("reuseTabs", document.getElementById("reuseTabs").checked);
 }
 
 function onUpwardMarginChange(event) {

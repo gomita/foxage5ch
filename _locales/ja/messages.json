@@ -71,6 +71,7 @@
 	"openThreads": { "message": "スレッドを開く" },
 	"clickBehavior_1": { "message": "左クリック時、新しいタブで開く" },
 	"clickBehavior_2": { "message": "すぐにそのタブに切り替える" },
+	"reuseTabs": { "message": "同一スレッドのタブを再利用する" },
 	"upwardMargin": { "message": "レスさかのぼり表示数:" },
 	"openInterval": { "message": "連続でスレを開く間隔(秒):" },
 	"https": { "message": "HTTPS 接続 (*.5ch.net, machi.to)" },

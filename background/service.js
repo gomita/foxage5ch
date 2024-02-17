@@ -388,7 +388,7 @@ var FoxAgeSvc = {
 			urlPattern += "*";
 		}
 		var tabs = await browser.tabs.query({ url: urlPattern, currentWindow: true });
-		if (tabs.length > 0) {
+		if (this.getPref("reuseTabs") && tabs.length > 0) {
 			// タブの再利用
 			// 再利用可能なタブが複数ある場合、先頭でよいかは検討の余地あり
 			// スレでURLが完全に一致する場合、タブをアクティブにするだけ

@@ -71,6 +71,7 @@
 	"openThreads": { "message": "Open Threads" },
 	"clickBehavior_1": { "message": "Open in a new tab with left-click" },
 	"clickBehavior_2": { "message": "Switch to the tab immediately" },
+	"reuseTabs": { "message": "Reuse tabs for same threads" },
 	"upwardMargin": { "message": "Number of posts to show upwardly:" },
 	"openInterval": { "message": "Interval to open threads (sec):" },
 	"https": { "message": "HTTPS connections (*.5ch.net, machi.to)" },
